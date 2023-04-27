@@ -42,5 +42,16 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //
 //        });
+
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Здесь можно добавить код для регистрации пользователя
+
+                // Переходим на окно EnterNumber
+                Intent intent = new Intent(MainActivity.this, EnterNumber.class);
+                startActivity(intent);
+            }
+        });
     }
 }
