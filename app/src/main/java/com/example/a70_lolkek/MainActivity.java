@@ -35,12 +35,12 @@ public class MainActivity extends AppCompatActivity {
 //            // TODO: Действия при нажатии на кнопку "Номер телефона"
 //        });
 //
-        button3.setOnClickListener(view -> {
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, EnterNumber.class);
-                startActivity(intent);
-            }
-
-        });
+//        button3.setOnClickListener(view -> {
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, EnterNumber.class);
+//                startActivity(intent);
+//            }
+//
+//        });
     }
 }

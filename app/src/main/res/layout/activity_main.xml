@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="#ECF0FF"
     android:translationX="0dp"
     tools:context=".MainActivity">
 
@@ -44,35 +44,33 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
+            android:gravity="center"
             android:text="@string/mainwords"
             android:textSize="30sp" />
 
         <Button
             android:id="@+id/button2"
-            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/phonenumber"
-            android:background="@drawable/button_background"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
-            android:translationY="30dp"
             android:layout_marginBottom="16dp"
-            />
+            android:background="@drawable/button_background"
+            android:text="@string/phonenumber"
+            android:translationY="30dp" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/registration"
-            android:background="@drawable/button_background"
             android:layout_marginStart="20dp"
-            android:translationY="30dp"
             android:layout_marginEnd="20dp"
-            />
+            android:background="@drawable/button_background"
+            android:text="@string/registration"
+            android:translationY="30dp" />
 
     </LinearLayout>
 </RelativeLayout>
