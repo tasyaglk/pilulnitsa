@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PILULKA</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="button">Button</string>
+    <string name="mainwords">Приложение для ведения учета лекарственных препаратов</string>
+    <string name="phonenumber">Вход по номеру телефона</string>
+    <string name="registration">Регистрация</string>
+    <string name="addphonenumber">Введите свой номер телефона</string>
+</resources>
