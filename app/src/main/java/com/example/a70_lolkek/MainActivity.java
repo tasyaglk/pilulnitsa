@@ -29,25 +29,14 @@ public class MainActivity extends AppCompatActivity {
         button2 = findViewById(R.id.button2);
         button3 = findViewById(R.id.button3);
 
-//        // Задаем обработчики нажатия на кнопки
 //        button2.setOnClickListener(view -> {
 //            // Обработчик для кнопки "Номер телефона"
 //            // TODO: Действия при нажатии на кнопку "Номер телефона"
-//        });
-//
-//        button3.setOnClickListener(view -> {
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, EnterNumber.class);
-//                startActivity(intent);
-//            }
-//
 //        });
 
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Здесь можно добавить код для регистрации пользователя
-
                 // Переходим на окно EnterNumber
                 Intent intent = new Intent(MainActivity.this, EnterNumber.class);
                 startActivity(intent);

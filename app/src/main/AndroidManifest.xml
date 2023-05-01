@@ -13,6 +13,13 @@
         android:theme="@style/Theme.70lolkek"
         tools:targetApi="31">
         <activity
+            android:name=".EnterCode"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".EnterNumber"
             android:exported="false">
             <meta-data

@@ -1,5 +1,6 @@
 package com.example.a70_lolkek;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,8 +27,9 @@ public class EnterNumber extends AppCompatActivity {
                 if (phoneNumber.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Введите номер телефона", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Отправляем SMS с кодом подтверждения на указанный номер
-                    // Здесь должен быть код для отправки SMS
+                    Intent intent = new Intent(EnterNumber.this, EnterCode.class);
+                    intent.putExtra("phoneNumber", phoneNumber);
+                    startActivity(intent);
                 }
             }
         });

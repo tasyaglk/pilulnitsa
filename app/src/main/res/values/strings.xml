@@ -8,4 +8,8 @@
     <string name="phonenumber">Вход по номеру телефона</string>
     <string name="registration">Регистрация</string>
     <string name="addphonenumber">Введите свой номер телефона</string>
+    <string name="codeFromSMS">Введите код из СМС</string>
+    <string name="tryWriteCode">Мы отправили код подтверждения на номер</string>
+    <string name="code">- - - -</string>
+    <string name="sentCode">Отправить код</string>
 </resources>
