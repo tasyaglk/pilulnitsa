@@ -16,11 +16,15 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_height="148dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="120dp"
-            android:textSize="25sp"
-            android:text="Введите номер телефона\nМы отправим СМС с кодом подтверждения на  номер, который Вы укажете" />
+            android:layout_marginEnd="30dp"
+            android:gravity="center"
+            android:text="@string/enterPhoneNumber"
+            android:textColor="@color/words_color"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editTextPhone"
@@ -31,6 +35,7 @@
             android:layout_marginEnd="16dp"
             android:ems="10"
             android:layout_marginTop="15dp"
+            android:textStyle="bold"
             android:hint="@string/addphonenumber"
             android:inputType="phone"
             android:minHeight="48dp" />
@@ -42,8 +47,9 @@
             android:background="@drawable/purple_button"
             android:layout_marginStart="75dp"
             android:layout_marginEnd="75dp"
-            android:layout_marginTop="15dp"
-            android:text="Получить код" />
+            android:layout_marginTop="35dp"
+            android:textStyle="bold"
+            android:text="@string/getCode" />
 
         <TextView
             android:id="@+id/textView3"
@@ -51,7 +57,11 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginTop="15dp"
-            android:text="Нажимая на кнопку вы  соглашаетесь" />
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="70dp"
+            android:textColor="@color/words_color"
+            android:textStyle="bold"
+            android:text="@string/agreeWith" />
 
         <TextView
             android:id="@+id/textView4"
@@ -59,7 +69,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginTop="10dp"
-            android:text="c Пользовательским соглашением" />
+            android:textColor="@color/words_color"
+            android:textStyle="bold"
+            android:text="@string/agreement_first" />
 
         <TextView
             android:id="@+id/textView5"
@@ -67,6 +79,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginTop="10dp"
-            android:text="с Политикой конфиденциальности" />
+            android:textColor="@color/words_color"
+            android:textStyle="bold"
+            android:text="@string/agreement_second" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

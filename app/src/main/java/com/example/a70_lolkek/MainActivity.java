@@ -11,11 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageView imageView;
-    private ImageView imageView2;
-    private TextView textView2;
-    private Button button2;
-    private Button button3;
+    private Button button_enter;
+    private Button button_registration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,18 +20,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Находим все элементы управления по их ID
-        imageView = findViewById(R.id.imageView);
-        imageView2 = findViewById(R.id.imageView2);
-        textView2 = findViewById(R.id.textView2);
-        button2 = findViewById(R.id.button2);
-        button3 = findViewById(R.id.button3);
+        button_enter = findViewById(R.id.button2);
+        button_registration = findViewById(R.id.button3);
 
-//        button2.setOnClickListener(view -> {
+//        button_enter.setOnClickListener(view -> {
 //            // Обработчик для кнопки "Номер телефона"
 //            // TODO: Действия при нажатии на кнопку "Номер телефона"
 //        });
 
-        button3.setOnClickListener(new View.OnClickListener() {
+        button_registration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Переходим на окно EnterNumber

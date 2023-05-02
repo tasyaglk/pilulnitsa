@@ -13,4 +13,13 @@
     <color name="light_blue_A200">#FF40C4FF</color>
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
+    <color name="home_button_main">#49A9A6</color>
+    <color name="words_color">#5F000000</color>
+    <color name="words_color_dark">#AF000000</color>
+    <color name="button_grey_color">#8E9099</color>
+    <color name="settings_white">#F9FAFF</color>
+    <color name="settings_blue">#7B95F2</color>
+    <color name="settings_green">#99CACE</color>
+    <color name="settings_red">#FF0000</color>
+
 </resources>

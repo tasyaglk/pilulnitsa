@@ -15,8 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class EnterCode extends AppCompatActivity {
 
     private TextView textViewPhone;
-    private EditText editTextNumberPassword3;
-    private Button button;
+    private EditText codeFromSMS;
+    private Button sendCode;
     private String phoneNumber;
 
     @Override
@@ -25,8 +25,8 @@ public class EnterCode extends AppCompatActivity {
         setContentView(R.layout.activity_enter_code);
 
         textViewPhone = findViewById(R.id.textViewPhone);
-        editTextNumberPassword3 = findViewById(R.id.editTextNumberPassword3);
-        editTextNumberPassword3.addTextChangedListener(new TextWatcher() {
+        codeFromSMS = findViewById(R.id.editTextNumberPassword3);
+        codeFromSMS.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -38,7 +38,7 @@ public class EnterCode extends AppCompatActivity {
                 // чекаем что не больше 4 символов
                 if (s.length() > 4) {
                     // типа очищение и вывод ошибки
-                    editTextNumberPassword3.setText("");
+                    codeFromSMS.setText("");
                     Toast.makeText(EnterCode.this, "Максимальная длина кода - 4 символа", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -48,7 +48,7 @@ public class EnterCode extends AppCompatActivity {
 
             }
         });
-        button = findViewById(R.id.button);
+        sendCode = findViewById(R.id.button);
 
         // тут номерокм получаем
         Bundle extras = getIntent().getExtras();
@@ -58,14 +58,14 @@ public class EnterCode extends AppCompatActivity {
         }
 
         // "Отправить код"
-        button.setOnClickListener(new View.OnClickListener() {
+        sendCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String code = editTextNumberPassword3.getText().toString();
+                String code = codeFromSMS.getText().toString();
                 // здесь надо отправить код на сервер для проверки - хз как
                 // код верный
-//                Intent intent = new Intent(EnterCode.this, NextActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(EnterCode.this, MainScreen.class);
+                startActivity(intent);
                 finish();
             }
         });
