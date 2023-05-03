@@ -1,12 +1,16 @@
 package com.example.a70_lolkek;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 public class PillsActivity extends AppCompatActivity {
 
+    private ImageView pill_plus;
     BottomNavigationFragment bottomNavigationFragment;
 
     @Override
@@ -19,5 +23,15 @@ public class PillsActivity extends AppCompatActivity {
             bottomNavigationFragment = (BottomNavigationFragment)bottom_fragment;
             bottomNavigationFragment.initializeComponents();
         }
+
+        pill_plus = findViewById(R.id.pill_plus);
+        pill_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Здесь будет создаваться новое лекарство
+                Intent intent = new Intent(PillsActivity.this, EventEditActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
