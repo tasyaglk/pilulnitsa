@@ -32,8 +32,8 @@ public class MainScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Здесь будет переход в календарь
-                //Intent intent = new Intent(MainScreen.this, EnterNumber.class);
-                //startActivity(intent);
+                Intent intent = new Intent(MainScreen.this, CalendarActivity.class);
+                startActivity(intent);
             }
         });
     }
