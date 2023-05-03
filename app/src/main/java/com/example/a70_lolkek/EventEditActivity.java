@@ -14,8 +14,8 @@ public class EventEditActivity extends AppCompatActivity {
     }
 
     void initAllPicker() {
-        initPicker(0, 12, numPickerH)
-        initPicker(0, 59, numPickerM)
-        initPickerWithString(0, (str.size - 1), numPickerAm, str)
+        initPicker(0, 12, numPickerH);
+        initPicker(0, 59, numPickerM);
+        initPickerWithString(0, (str.size - 1), numPickerAm, str);
     }
 }
