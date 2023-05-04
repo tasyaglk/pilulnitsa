@@ -11,6 +11,7 @@ public class MainScreen extends AppCompatActivity {
 
     private ImageView settings_button;
     private ImageView calendar_button;
+    private ImageView pill_plus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +19,7 @@ public class MainScreen extends AppCompatActivity {
 
         settings_button = findViewById(R.id.settings_button);
         calendar_button = findViewById(R.id.calendar_button);
+        pill_plus = findViewById(R.id.pill_plus);
 
         settings_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,6 +35,15 @@ public class MainScreen extends AppCompatActivity {
             public void onClick(View view) {
                 // Здесь будет переход в календарь
                 Intent intent = new Intent(MainScreen.this, CalendarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        pill_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Здесь добавление лекарства в курс
+                Intent intent = new Intent(MainScreen.this, AddToCourseActivity.class);
                 startActivity(intent);
             }
         });

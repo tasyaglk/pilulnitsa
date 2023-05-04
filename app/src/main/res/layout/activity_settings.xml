@@ -247,9 +247,11 @@
             android:layout_marginTop="755dp"  />
 
         <TextView
+            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:textColor="@color/black"
             android:text="@string/app_version"
             android:layout_marginTop="810dp"/>
 

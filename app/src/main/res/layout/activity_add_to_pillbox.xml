@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".AddToPillboxActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+
+        <EditText
+            android:id="@+id/pill_name"
+            android:layout_width="337dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Название лекарства"
+            android:textColor="@color/button_grey_color"
+            android:textColorHint="@color/button_grey_color"
+            android:backgroundTint="@color/button_grey_color"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:ems="10"
+            android:inputType="text"/>
+
+        <TextView
+            android:id="@+id/pill_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Вид лекарства"
+            android:textColor="@color/words_color"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/main_view"
+                android:layout_marginTop="10dp"
+                android:layout_width="337dp"
+                android:layout_height="180dp"
+                android:background="@drawable/white_settings_button"/>
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/pills"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                app:maxImageSize="35dp"
+                app:fabCustomSize="50dp"
+                android:src="@drawable/tablet"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="А ты не забыла принять таблетки?"
+                android:textSize="9sp"
+                android:textColor="@color/button_grey_color"
+                android:textStyle="bold"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="82dp"
+                android:elevation="100dp"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/drops"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="145dp"
+                android:layout_marginTop="30dp"
+                app:backgroundTint="@color/non_tablets_color"
+                app:borderWidth="0dp"
+                app:maxImageSize="35dp"
+                app:fabCustomSize="50dp"
+                android:src="@drawable/drops"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Капли"
+                android:textSize="13sp"
+                android:textColor="@color/button_grey_color"
+                android:textStyle="bold"
+                android:layout_marginStart="153dp"
+                android:layout_marginTop="82dp"
+                android:elevation="100dp"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/teaspoon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundTint="@color/non_tablets_color"
+                android:layout_marginStart="260dp"
+                android:layout_marginTop="30dp"
+                app:maxImageSize="35dp"
+                app:fabCustomSize="50dp"
+                android:src="@drawable/teaspoon"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Чайные ложки"
+                android:textSize="13sp"
+                android:textColor="@color/button_grey_color"
+                android:textStyle="bold"
+                android:layout_marginStart="240dp"
+                android:layout_marginTop="82dp"
+                android:elevation="100dp"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/spoon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="110dp"
+                app:maxImageSize="35dp"
+                app:fabCustomSize="50dp"
+                android:src="@drawable/spoon"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Столовые ложки"
+                android:textSize="13sp"
+                android:textColor="@color/button_grey_color"
+                android:textStyle="bold"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="162dp"
+                android:elevation="100dp"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/syringe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="145dp"
+                android:layout_marginTop="110dp"
+                app:backgroundTint="@color/non_tablets_color"
+                app:borderWidth="0dp"
+                app:maxImageSize="35dp"
+                app:fabCustomSize="50dp"
+                android:src="@drawable/syringe"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Шприцы"
+                android:textSize="13sp"
+                android:textColor="@color/button_grey_color"
+                android:textStyle="bold"
+                android:layout_marginStart="143dp"
+                android:layout_marginTop="162dp"
+                android:elevation="100dp"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:backgroundTint="@color/non_tablets_color"
+                android:layout_marginStart="260dp"
+                android:layout_marginTop="110dp"
+                app:maxImageSize="35dp"
+                app:fabCustomSize="50dp"
+                android:src="@drawable/more"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Другое"
+                android:textSize="13sp"
+                android:textColor="@color/button_grey_color"
+                android:textStyle="bold"
+                android:layout_marginStart="263dp"
+                android:layout_marginTop="162dp"
+                android:elevation="100dp"/>
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/dosage_type"
+            android:layout_width="337dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Вид дозировки"
+            android:textColor="@color/button_grey_color"
+            android:textColorHint="@color/button_grey_color"
+            android:backgroundTint="@color/button_grey_color"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:ems="10"
+            android:inputType="text"/>
+
+        <EditText
+            android:id="@+id/best_before"
+            android:layout_width="337dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Срок годности до"
+            android:textColor="@color/button_grey_color"
+            android:textColorHint="@color/button_grey_color"
+            android:backgroundTint="@color/button_grey_color"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:ems="10"
+            android:inputType="date"/>
+
+        <EditText
+            android:id="@+id/tablets_amount"
+            android:layout_width="337dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Кол-во таблеток"
+            android:textColor="@color/button_grey_color"
+            android:textColorHint="@color/button_grey_color"
+            android:backgroundTint="@color/button_grey_color"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:ems="10"
+            android:inputType="number"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp">
+
+            <Button
+                android:id="@+id/go_back"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="Отменить"
+                android:textColor="@color/words_color_dark"
+                android:textStyle="bold"
+                android:background="@drawable/go_back_button"/>
+
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:text="Добавить"
+                android:textColor="@color/background"
+                android:textStyle="bold"
+                android:background="@drawable/save_button"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
