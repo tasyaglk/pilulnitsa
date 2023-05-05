@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".AddToCourseActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_centerInParent="true"
+                android:text="Добавление в курс"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/choose_pill"
+                android:layout_width="337dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Выберите лекарство"
+                android:textColor="@color/button_grey_color"
+                android:backgroundTint="@color/button_grey_color"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:ems="10"
+                android:inputType="text"/>
+
+            <EditText
+                android:id="@+id/amount"
+                android:layout_width="337dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Количество"
+                android:textColor="@color/button_grey_color"
+                android:backgroundTint="@color/button_grey_color"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:ems="10"
+                android:inputType="number"/>
+
+            <TextView
+                android:id="@+id/time_pilltaking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Время приема"
+                android:textColor="@color/words_color"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TimePicker
+                    android:id="@+id/choose_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/background"
+                    android:theme="@style/DefaultNumberPickerTheme"
+                    android:timePickerMode="spinner"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/how_to_take"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Лекарство принимать:"
+                android:textColor="@color/words_color"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:theme="@style/RadioButtons">
+                <RadioButton android:id="@+id/before_eating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="До еды"
+                    android:textColor="@color/button_grey_color"
+                    android:onClick="onRadioButtonClicked"/>
+                <RadioButton android:id="@+id/after_eating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="После еды"
+                    android:textColor="@color/button_grey_color"
+                    android:onClick="onRadioButtonClicked"/>
+
+                <RadioButton
+                    android:id="@+id/while_eating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="Во время еды"
+                    android:textColor="@color/button_grey_color" />
+
+                <RadioButton android:id="@+id/not_eating_connected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Неважно"
+                    android:textColor="@color/button_grey_color"
+                    android:onClick="onRadioButtonClicked"/>
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/taking_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Дни приема"
+                android:textColor="@color/words_color"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/main_view"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="337dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/white_settings_button"/>
+
+<!--                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton-->
+<!--                    android:id="@+id/extended_fab"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    android:layout_marginBottom="16dp"-->
+<!--                    android:text="Пн"-->
+<!--                    app:cornerRadius="30dp" />-->
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/beginning"
+                android:layout_width="337dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Начало"
+                android:textColor="@color/button_grey_color"
+                android:backgroundTint="@color/button_grey_color"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:ems="10"
+                android:inputType="date"/>
+
+            <TextView
+                android:id="@+id/ending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Окончание по:"
+                android:textColor="@color/words_color"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"/>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:theme="@style/RadioButtons">
+                <RadioButton android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Дате"
+                    android:textColor="@color/button_grey_color"
+                    android:onClick="onRadioButtonClicked"/>
+                <RadioButton android:id="@+id/pills_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Кол-во таблеток"
+                    android:textColor="@color/button_grey_color"
+                    android:layout_marginStart="20dp"
+                    android:onClick="onRadioButtonClicked"/>
+
+                <RadioButton
+                    android:id="@+id/days_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonClicked"
+                    android:layout_marginStart="20dp"
+                    android:text="Кол-во дней"
+                    android:textColor="@color/button_grey_color" />
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp">
+
+                <Button
+                    android:id="@+id/go_back"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="Отменить"
+                    android:textColor="@color/words_color_dark"
+                    android:textStyle="bold"
+                    android:background="@drawable/go_back_button"/>
+
+                <Button
+                    android:id="@+id/save_button"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:text="Добавить"
+                    android:textColor="@color/background"
+                    android:textStyle="bold"
+                    android:background="@drawable/save_button"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

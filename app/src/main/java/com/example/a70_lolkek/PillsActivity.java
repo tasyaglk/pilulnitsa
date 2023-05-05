@@ -25,13 +25,13 @@ public class PillsActivity extends AppCompatActivity {
         }
 
         pill_plus = findViewById(R.id.pill_plus);
-//        pill_plus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-////            public void onClick(View view) {
-////                // Здесь будет создаваться новое лекарство
-////                Intent intent = new Intent(PillsActivity.this, EventEditActivity.class);
-////                startActivity(intent);
-////            }
-//        });
+        pill_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Здесь будет создаваться новое лекарство
+                Intent intent = new Intent(PillsActivity.this, AddToPillboxActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

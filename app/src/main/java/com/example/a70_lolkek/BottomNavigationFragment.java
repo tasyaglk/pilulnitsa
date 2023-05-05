@@ -60,7 +60,6 @@ public class BottomNavigationFragment extends Fragment implements View.OnClickLi
 
     private void setBottomNavigationView() {
         int blue_color = getActivity().getResources().getColor(R.color.home_button_main);
-        int grey_color = getActivity().getResources().getColor(R.color.background);
         if (getActivity() != null && getActivity() instanceof MainScreen) {
             iv_1.setColorFilter(blue_color);
         } else if (getActivity() != null && getActivity() instanceof AccountActivity) {

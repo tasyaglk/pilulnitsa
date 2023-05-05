@@ -40,4 +40,9 @@
         <item name="colorControlNormal">@color/button_grey_color</item>
         <item name="android:textColorPrimary">@android:color/black</item>
     </style>
+
+    <style name="RadioButtons" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/home_button_main</item>
+    </style>
+
 </resources>
