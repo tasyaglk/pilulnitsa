@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
     android:orientation="vertical"
+    android:id="@+id/linear"
     tools:context=".AddToCourseActivity">
 
     <ScrollView
@@ -27,31 +28,49 @@
                 android:textAlignment="center"
                 android:textColor="@color/black"/>
 
-            <EditText
-                android:id="@+id/choose_pill"
-                android:layout_width="337dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Выберите лекарство"
-                android:textColor="@color/button_grey_color"
-                android:backgroundTint="@color/button_grey_color"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:ems="10"
-                android:inputType="text"/>
+                android:textColorHint="@color/button_grey_color"
+                android:layout_marginTop="10dp">
 
-            <EditText
-                android:id="@+id/amount"
-                android:layout_width="337dp"
+                <EditText
+                    android:id="@+id/choose_pill"
+                    android:layout_width="337dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Выберите лекарство"
+                    android:layout_gravity="center"
+                    android:textColor="@color/button_grey_color"
+                    android:backgroundTint="@color/button_grey_color"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:ems="10"
+                    android:inputType="text"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Количество"
-                android:textColor="@color/button_grey_color"
-                android:backgroundTint="@color/button_grey_color"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:ems="10"
-                android:inputType="number"/>
+                android:textColorHint="@color/button_grey_color"
+                android:layout_gravity="center">
+
+                <EditText
+                    android:id="@+id/amount"
+                    android:layout_width="337dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Дозировка"
+                    android:layout_gravity="center"
+                    android:textColor="@color/button_grey_color"
+                    android:backgroundTint="@color/button_grey_color"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:ems="10"
+                    android:inputType="number"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/time_pilltaking"
@@ -74,99 +93,103 @@
                     android:layout_centerHorizontal="true"
                     android:background="@color/background"
                     android:theme="@style/DefaultNumberPickerTheme"
-                    android:timePickerMode="spinner"/>
+                    android:timePickerMode="spinner" />
 
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/how_to_take"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Лекарство принимать:"
-                android:textColor="@color/words_color"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
-
-            <RadioGroup
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_marginTop="10dp"
-                android:theme="@style/RadioButtons">
-                <RadioButton android:id="@+id/before_eating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="До еды"
-                    android:textColor="@color/button_grey_color"
-                    android:onClick="onRadioButtonClicked"/>
-                <RadioButton android:id="@+id/after_eating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="После еды"
-                    android:textColor="@color/button_grey_color"
-                    android:onClick="onRadioButtonClicked"/>
-
-                <RadioButton
-                    android:id="@+id/while_eating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onRadioButtonClicked"
-                    android:text="Во время еды"
-                    android:textColor="@color/button_grey_color" />
-
-                <RadioButton android:id="@+id/not_eating_connected"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Неважно"
-                    android:textColor="@color/button_grey_color"
-                    android:onClick="onRadioButtonClicked"/>
-            </RadioGroup>
-
-            <TextView
-                android:id="@+id/taking_days"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Дни приема"
-                android:textColor="@color/words_color"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textColorHint="@color/button_grey_color">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <Button
-                    android:id="@+id/main_view"
-                    android:layout_marginTop="10dp"
+                <EditText
+                    android:id="@+id/how_to_take"
                     android:layout_width="337dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/white_settings_button"/>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="Лекарство принимать"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:textColor="@color/button_grey_color"
+                    android:backgroundTint="@color/button_grey_color"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:ems="10"
+                    android:inputType="text"/>
 
-<!--                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton-->
-<!--                    android:id="@+id/extended_fab"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="16dp"-->
-<!--                    android:layout_marginTop="16dp"-->
-<!--                    android:layout_marginEnd="16dp"-->
-<!--                    android:layout_marginBottom="16dp"-->
-<!--                    android:text="Пн"-->
-<!--                    app:cornerRadius="30dp" />-->
+            </com.google.android.material.textfield.TextInputLayout>
 
-            </RelativeLayout>
-
-            <EditText
-                android:id="@+id/beginning"
-                android:layout_width="337dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Начало"
-                android:textColor="@color/button_grey_color"
-                android:backgroundTint="@color/button_grey_color"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:ems="10"
-                android:inputType="date"/>
+                android:textColorHint="@color/button_grey_color">
+
+                <EditText
+                    android:id="@+id/taking_days"
+                    android:layout_width="337dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="Дни приема"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:textColor="@color/button_grey_color"
+                    android:backgroundTint="@color/button_grey_color"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:ems="10"
+                    android:inputType="text"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/button_grey_color">
+
+                <EditText
+                    android:id="@+id/choose_days"
+                    android:layout_width="337dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="Выберите дни"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:textColor="@color/button_grey_color"
+                    android:backgroundTint="@color/button_grey_color"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:ems="10"
+                    android:visibility="gone"
+                    android:inputType="text"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/button_grey_color">
+
+                <EditText
+                    android:id="@+id/beginning"
+                    android:layout_width="337dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="Начало"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:textColor="@color/button_grey_color"
+                    android:backgroundTint="@color/button_grey_color"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:ems="10"
+                    android:inputType="text"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <TextView
                 android:id="@+id/ending"

@@ -1,9 +1,12 @@
 package com.example.a70_lolkek;
 
+import static com.example.a70_lolkek.Pill.pillBox;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -12,11 +15,13 @@ public class PillsActivity extends AppCompatActivity {
 
     private ImageView pill_plus;
     BottomNavigationFragment bottomNavigationFragment;
+    private ListView eventListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pills);
+        initWidgets();
 
         Fragment bottom_fragment = getSupportFragmentManager().findFragmentById(R.id.bottom_navigation_id);
         if (bottom_fragment instanceof Fragment) {
@@ -24,7 +29,6 @@ public class PillsActivity extends AppCompatActivity {
             bottomNavigationFragment.initializeComponents();
         }
 
-        pill_plus = findViewById(R.id.pill_plus);
         pill_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,5 +37,12 @@ public class PillsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void initWidgets() {
+        pill_plus = findViewById(R.id.pill_plus);
+        eventListView = findViewById(R.id.pillListView);
+        PillAdapter eventAdapter = new PillAdapter(getApplicationContext(), pillBox);
+        eventListView.setAdapter(eventAdapter);
     }
 }

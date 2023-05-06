@@ -69,23 +69,23 @@
             android:layout_marginStart="28dp"
             android:layout_marginTop="725dp" />
 
-        <Button
-            android:id="@+id/main_view"
-            style="@style/Widget.AppCompat.ActionButton.CloseMode"
-            android:layout_width="337dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="117dp"
-            android:background="@drawable/white_settings_button"
-            android:ems="10"
-            android:gravity="center_vertical"
-            android:minHeight="48dp"
-            android:text="@string/main_screen_view"
-            android:textColor="@color/words_color_dark"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            <Button
+                android:id="@+id/main_view"
+                style="@style/Widget.AppCompat.ActionButton.CloseMode"
+                android:layout_width="337dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="117dp"
+                android:background="@drawable/white_settings_button"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:text="@string/main_screen_view"
+                android:textColor="@color/words_color_dark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        <Button
+            <Button
             android:id="@+id/sound"
             android:layout_width="337dp"
             android:layout_height="48dp"

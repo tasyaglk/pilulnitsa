@@ -22,18 +22,14 @@ public class CalendarActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
-
         calendar = Calendar.getInstance();
-
 
         calendar.set(Calendar.MONTH, Calendar.NOVEMBER);
         calendar.set(Calendar.DAY_OF_MONTH, 9);
         calendar.set(Calendar.YEAR, 2012);
 
-
         calendar.add(Calendar.DAY_OF_MONTH, 1);
         calendar.add(Calendar.YEAR, 1);
-
 
         calendarView = findViewById(R.id.calendarView);
 

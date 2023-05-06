@@ -7,6 +7,9 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 public class MainScreen extends AppCompatActivity {
 
     private ImageView settings_button;
@@ -15,7 +18,7 @@ public class MainScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_screen);
+        setContentView(R.layout.main_screen2);
 
         settings_button = findViewById(R.id.settings_button);
         calendar_button = findViewById(R.id.calendar_button);
