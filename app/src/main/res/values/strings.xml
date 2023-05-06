@@ -45,4 +45,15 @@
     <string name="birth_date">Дата Рождения</string>
     <string name="name">Имя</string>
     <string name="surname">Фамилия</string>
+
+    <string-array name="days">
+        <item>Пн</item>
+        <item>Вт</item>
+        <item>Ср</item>
+        <item>Чт</item>
+        <item>Пт</item>
+        <item>Сб</item>
+        <item>Вс</item>
+    </string-array>
+
 </resources>

@@ -32,13 +32,13 @@
         android:orientation="vertical">
 
         <ListView
-            android:id="@+id/eventListView"
-            style="@style/CardView"
+            android:id="@+id/pillListView"
+            android:dividerHeight="10dp"
             android:layout_marginTop="100dp"
-            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_width="390dp"
             android:layout_height="0dp"
-            android:layout_weight="5"
-            />
+            android:layout_weight="5" />
     </LinearLayout>
 
     <include
