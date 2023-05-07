@@ -64,6 +64,7 @@ public class EnterCode extends AppCompatActivity {
                 String code = codeFromSMS.getText().toString();
                 // здесь надо отправить код на сервер для проверки - хз как
                 // код верный
+
                 Intent intent = new Intent(EnterCode.this, MainScreen.class);
                 startActivity(intent);
                 finish();

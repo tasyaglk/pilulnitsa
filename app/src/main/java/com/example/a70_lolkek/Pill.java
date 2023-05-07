@@ -11,8 +11,6 @@ public class Pill {
     private String name, dosage_type, best_before;
     private int tablets_amount;
 
-    String[] types = {"таблетк", "капл", "ложк", "Шт", "шприц", "мл", "гр"};
-
     public Pill(String name, String dosage_type, String best_before, int tablets_amount)
     {
         this.name = name;
@@ -33,28 +31,34 @@ public class Pill {
         if (tablets_amount % 10 == 1 && tablets_amount != 11) {
             return tablets_amount + " " + dosage_type;
         } else if ((tablets_amount % 10 == 2 || tablets_amount % 10 == 3 || tablets_amount % 10 == 4) && tablets_amount != 12 && tablets_amount != 13 && tablets_amount != 14) {
-            if (Objects.equals(dosage_type, "таблетка")) {
+            if (Objects.equals(dosage_type, "Таблетка")) {
                 return tablets_amount + " таблетки";
-            } else if (Objects.equals(dosage_type, "капля")) {
+            } else if (Objects.equals(dosage_type, "Капля")) {
                 return tablets_amount + " капли";
-            } else if (Objects.equals(dosage_type, "ложки")) {
+            } else if (Objects.equals(dosage_type, "Ложка")) {
                 return tablets_amount + " ложки";
-            } else {
+            } else if (Objects.equals(dosage_type, "Шприц")) {
                 return tablets_amount + " шприца";
+            } else {
+                return tablets_amount + " " + dosage_type;
             }
         } else {
-            if (Objects.equals(dosage_type, "таблетка")) {
+            if (Objects.equals(dosage_type, "Таблетка")) {
                 return tablets_amount + " таблеток";
-            } else if (Objects.equals(dosage_type, "капля")) {
+            } else if (Objects.equals(dosage_type, "Капля")) {
                 return tablets_amount + " капель";
-            } else if (Objects.equals(dosage_type, "ложки")) {
+            } else if (Objects.equals(dosage_type, "Ложка")) {
                 return tablets_amount + " ложек";
-            } else {
+            } else if (Objects.equals(dosage_type, "Шприц")) {
                 return tablets_amount + " шприцов";
+            } else {
+                return tablets_amount + " " + dosage_type;
             }
         }
     }
-//1 таблетка капля ложка шприц
-//2-4 таблетки капли ложки шприца
-//5-20 таблеток капель ложек шприцов
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

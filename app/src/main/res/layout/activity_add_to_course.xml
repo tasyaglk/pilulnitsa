@@ -28,39 +28,29 @@
                 android:textAlignment="center"
                 android:textColor="@color/black"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
+            <Spinner
+                android:id="@+id/choose_pill"
+                android:layout_width="337dp"
                 android:layout_height="wrap_content"
-                android:textColorHint="@color/button_grey_color"
-                android:layout_marginTop="10dp">
-
-                <EditText
-                    android:id="@+id/choose_pill"
-                    android:layout_width="337dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:hint="Выберите лекарство"
-                    android:layout_gravity="center"
-                    android:textColor="@color/button_grey_color"
-                    android:backgroundTint="@color/button_grey_color"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:ems="10"
-                    android:inputType="text"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/button_grey_color"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:ems="10"
+                android:inputType="text"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/button_grey_color"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp">
 
                 <EditText
                     android:id="@+id/amount"
                     android:layout_width="337dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:hint="Дозировка"
                     android:layout_gravity="center"
                     android:textColor="@color/button_grey_color"
@@ -186,7 +176,7 @@
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:ems="10"
-                    android:inputType="text"/>
+                    android:inputType="date"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -209,13 +199,13 @@
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:ems="10"
-                    android:inputType="text"/>
+                    android:inputType="date"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textColorHint="@color/button_grey_color">
 
                 <EditText
@@ -223,7 +213,7 @@
                     android:layout_width="337dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:hint="Выберите дни"
+                    android:hint="Выберите дату"
                     android:clickable="false"
                     android:cursorVisible="false"
                     android:focusable="false"
@@ -233,7 +223,55 @@
                     android:textSize="20sp"
                     android:ems="10"
                     android:visibility="gone"
-                    android:inputType="text"/>
+                    android:inputType="date"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/button_grey_color">
+
+                <EditText
+                    android:id="@+id/end_days_number"
+                    android:layout_width="337dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="Укажите кол-во дней"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:textColor="@color/button_grey_color"
+                    android:backgroundTint="@color/button_grey_color"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:ems="10"
+                    android:visibility="gone"
+                    android:inputType="number"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/button_grey_color">
+
+                <EditText
+                    android:id="@+id/end_pill_number"
+                    android:layout_width="337dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="Укажите кол-во таблеток"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:textColor="@color/button_grey_color"
+                    android:backgroundTint="@color/button_grey_color"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:ems="10"
+                    android:visibility="gone"
+                    android:inputType="number"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 

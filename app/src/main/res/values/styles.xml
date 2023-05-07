@@ -23,17 +23,17 @@
     </style>
 
     <style name="CalenderViewCustom" parent="Theme.AppCompat">
-        <item name="colorAccent">@android:color/holo_blue_dark</item>
+        <item name="colorAccent">@color/tablets_color</item>
         <item name="colorPrimary">@android:color/darker_gray</item>
         <item name="android:textColorPrimary">@color/black</item>
     </style>
 
     <style name="CalenderViewDateCustomText" parent="android:TextAppearance.DeviceDefault.Small">
-        <item name="android:textColor">@android:color/holo_orange_dark</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
     <style name="CalenderViewWeekCustomText" parent="android:TextAppearance.DeviceDefault.Small">
-        <item name="android:textColor">@android:color/holo_green_dark</item>
+        <item name="android:textColor">@color/home_button_main</item>
     </style>
 
     <style name="DefaultNumberPickerTheme" parent="Theme.AppCompat">
@@ -45,4 +45,5 @@
         <item name="colorControlNormal">@color/home_button_main</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 </resources>
