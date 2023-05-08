@@ -59,7 +59,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/button_background"
-            android:text="@string/phonenumber"
+            android:text="@string/enter"
             android:translationY="30dp" />
 
         <Button

@@ -49,15 +49,7 @@
             android:onClick="previousMonthAction"
             android:textSize="20sp"/>
 
-        <TextView
-            android:id="@+id/monthYearTV"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content"
-            android:text="Feb 2021"
-            android:textSize="20sp"
-            android:textAlignment="center"
-            android:textColor="@color/black"/>
+
 
         <Button
             android:layout_width="0dp"
@@ -80,15 +72,16 @@
         app:srcCompat="@drawable/plus_pill" />
 
     <TextView
-        android:id="@+id/text_view_date"
+        android:id="@+id/date_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="@string/date"
+        android:text="@string/date_placeholder"
         android:textStyle="bold"
         android:textSize="30sp"
         android:textColor="@color/words_color"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="24dp" />
+
 
     <TextView
         android:id="@+id/pills_list"
@@ -108,6 +101,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+
 
 </RelativeLayout>
