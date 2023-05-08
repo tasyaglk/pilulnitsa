@@ -245,7 +245,7 @@
                 android:layout_width="337dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="Кол-во таблеток"
+                android:hint="Кол-во лекарства"
                 android:layout_gravity="center"
                 android:textColor="@color/button_grey_color"
                 android:textColorHint="@color/button_grey_color"
