@@ -24,11 +24,8 @@
             android:name=".CalendarActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity2"
+            android:name=".MedicationPreferences"
             android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
         <activity
             android:name=".AddToPillboxActivity"
@@ -37,7 +34,7 @@
             android:name=".AddToCourseActivity"
             android:exported="false" />
         <activity
-            android:name=".CalendarView"
+            android:name=".Medication"
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"

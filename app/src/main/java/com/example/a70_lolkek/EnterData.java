@@ -4,23 +4,22 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class EnterData extends AppCompatActivity {
 
     private EditText surnameEditText, nameEditText, birthDateEditText, phoneNumberEditText;
     private Button continueButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +55,6 @@ public class EnterData extends AppCompatActivity {
             }
         });
 
-
         // При нажатии на кнопку сохраняем данные
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +63,12 @@ public class EnterData extends AppCompatActivity {
                 String name = nameEditText.getText().toString();
                 String birthDate = birthDateEditText.getText().toString();
                 String phoneNumber = phoneNumberEditText.getText().toString();
+
+                // Проверяем, заполнены ли все поля
+                if (TextUtils.isEmpty(surname) || TextUtils.isEmpty(name) || TextUtils.isEmpty(birthDate) || TextUtils.isEmpty(phoneNumber)) {
+                    Toast.makeText(EnterData.this, "Пожалуйста, заполните все поля", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 // Сохраняем данные в SharedPreferences
                 SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
@@ -75,12 +79,10 @@ public class EnterData extends AppCompatActivity {
                 editor.putString("phoneNumber", phoneNumber);
                 editor.apply();
 
-                 //Переходим на главный экран
+                //Переходим на главный экран
                 Intent intent = new Intent(EnterData.this, MainScreen.class);
                 startActivity(intent);
             }
         });
     }
 }
-
-

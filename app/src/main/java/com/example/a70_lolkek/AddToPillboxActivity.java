@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +32,11 @@ public class AddToPillboxActivity extends AppCompatActivity {
     String[] types = {"Таблетка", "Капля", "Ложка", "Шт", "Шприц", "Мл", "Гр"};
 
     String name;
+    private Integer size = 0;
+
+    public Integer getSize() {
+        return size;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -212,7 +218,6 @@ public class AddToPillboxActivity extends AppCompatActivity {
                 Pill newPill = new Pill(name, dosage, best, finalAmount);
                 Pill.pillBox.add(newPill);
                 Pill.pillBox.sort(Comparator.comparing(Pill::getName));
-
                 Intent intent = new Intent(AddToPillboxActivity.this, PillsActivity.class);
                 startActivity(intent);
             }
