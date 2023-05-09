@@ -8,7 +8,7 @@ public class Event {
 
     private String name, time_to_take, how_to_take, taking_days, beginning, ending, choose_end_date;
     private int amount, end_days_number, end_pill_number;
-    public ArrayList<Integer> choose_days = new ArrayList<>();
+    public ArrayList<Integer> choose_days;
     private LocalDate date;
     LocalTime time;
     public static ArrayList<Event> eventsList = new ArrayList<>();

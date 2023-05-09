@@ -37,7 +37,6 @@ public class AddToCourseActivity extends AppCompatActivity {
     String[] takingDays = {"Каждый день", "Через день", "Выбрать дни"};
     String[] days = {"Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"};
     String[] endPill = {"Дата", "Кол-во дней", "Кол-во таблеток"};
-
     String name;
 
     @Override
@@ -335,21 +334,30 @@ public class AddToCourseActivity extends AppCompatActivity {
                     return;
                 }
                 // забираем все введенные параметры
-                int number_d = 0;
-                int number_p = 0;
+                if (add_to_course) {
+                    int number_d = 0;
+                    int number_p = 0;
 
-                int finalAmount = Integer.parseInt(dosage);
-                if (end.equals(endPill[1])) {
-                    number_d = Integer.parseInt(number_days);
-                } else if (end.equals(endPill[2])) {
-                    number_p = Integer.parseInt(number_pills);
+                    int finalAmount = Integer.parseInt(dosage);
+                    if (end.equals(endPill[1])) {
+                        number_d = Integer.parseInt(number_days);
+                    } else if (end.equals(endPill[2])) {
+                        number_p = Integer.parseInt(number_pills);
+                    }
+                    // создаем все события
+                    if (!end_date.matches("")) {
+                        //for ()
+                    }
+                    Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
+                            finalAmount, number_d, number_p, CalendarUtils.selectedDate, mSelectedItems);
+                    Event.eventsList.add(newEvent);
+
+                    Intent intent = new Intent(context, MainScreen.class);
+                    startActivity(intent);
+                } else {
+
                 }
-                Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
-                                           finalAmount, number_d, number_p, CalendarUtils.selectedDate, mSelectedItems);
-                Event.eventsList.add(newEvent);
 
-                Intent intent = new Intent(context, MainScreen.class);
-                startActivity(intent);
             }
         });
 

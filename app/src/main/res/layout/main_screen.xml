@@ -82,7 +82,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SUN"
+            android:text="Пн"
+            android:textStyle="bold"
             android:textColor="@color/button_grey_color"
             android:textAlignment="center"
             android:textSize="16sp"/>
@@ -91,7 +92,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="MON"
+            android:text="Вт"
+            android:textStyle="bold"
             android:textColor="@color/button_grey_color"
             android:textAlignment="center"
             android:textSize="16sp"/>
@@ -100,7 +102,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TUE"
+            android:text="Ср"
+            android:textStyle="bold"
             android:textColor="@color/button_grey_color"
             android:textAlignment="center"
             android:textSize="16sp"/>
@@ -109,7 +112,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="WED"
+            android:text="Чт"
+            android:textStyle="bold"
             android:textColor="@color/button_grey_color"
             android:textAlignment="center"
             android:textSize="16sp"/>
@@ -118,7 +122,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="THUR"
+            android:text="Пт"
+            android:textStyle="bold"
             android:textColor="@color/button_grey_color"
             android:textAlignment="center"
             android:textSize="16sp"/>
@@ -127,7 +132,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="FRI"
+            android:text="Сб"
+            android:textStyle="bold"
             android:textColor="@color/button_grey_color"
             android:textAlignment="center"
             android:textSize="16sp"/>
@@ -136,7 +142,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SAT"
+            android:text="Вс"
+            android:textStyle="bold"
             android:textColor="@color/button_grey_color"
             android:textAlignment="center"
             android:textSize="16sp"/>
@@ -177,8 +184,12 @@
     <ListView
         android:id="@+id/eventListView"
         android:layout_width="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_height="0dp"
-        android:layout_weight="5"/>
+        android:layout_weight="5"
+        android:layout_marginTop="5dp"
+        android:dividerHeight="10dp"/>
 
     <include
         android:id="@+id/bottom_navi"
