@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ECF0FF"
+    android:orientation="vertical"
     android:foregroundTint="#CC99CACE"
     tools:context=".EnterData">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
         <TextView
             android:id="@+id/greetings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/enterYourData"
             android:textColor="@color/black"
             android:textSize="30sp"
@@ -28,11 +26,13 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:textColorHint="@color/button_grey_color">
 
             <EditText
                 android:id="@+id/surname"
-                android:layout_width="400dp"
+                android:layout_width="337dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:hint="@string/surname"
@@ -58,7 +58,7 @@
 
             <EditText
                 android:id="@+id/name"
-                android:layout_width="400dp"
+                android:layout_width="337dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:hint="@string/name"
@@ -69,10 +69,10 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:ems="10"
+                  
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:inputType="textPersonName"/>
-
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -83,7 +83,7 @@
 
             <EditText
                 android:id="@+id/birth_date"
-                android:layout_width="400dp"
+                android:layout_width="337dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:hint="@string/enter_birth_date"
@@ -95,8 +95,6 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:ems="10"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:inputType="date"/>
 
 
@@ -109,7 +107,7 @@
 
         <EditText
             android:id="@+id/phone_number"
-            android:layout_width="400dp"
+            android:layout_width="337dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="@string/addphonenumber"
@@ -120,16 +118,17 @@
             android:textStyle="bold"
             android:textSize="20sp"
             android:ems="10"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
             android:inputType="number"/>
 
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
         <Button
             android:id="@+id/continue_begin"
-            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_width="337dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/settings_green"
             android:text="Продолжить"
@@ -137,6 +136,4 @@
             android:layout_marginEnd="8dp"
             android:textStyle="bold" />
 
-
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

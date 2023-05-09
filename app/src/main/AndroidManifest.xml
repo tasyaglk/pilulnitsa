@@ -12,13 +12,16 @@
         android:theme="@style/Theme.AppCompat"
         tools:targetApi="31">
         <activity
+            android:name=".EventEditActivity"
+            android:exported="false" />
+        <activity
             android:name=".StatisticsActivity"
             android:exported="false" />
         <activity
             android:name=".CourseActivity"
             android:exported="false" />
         <activity
-            android:name=".CalendarAdapter"
+            android:name=".CalendarActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity2"
@@ -34,7 +37,7 @@
             android:name=".AddToCourseActivity"
             android:exported="false" />
         <activity
-            android:name=".CalendarActivity"
+            android:name=".CalendarView"
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"
