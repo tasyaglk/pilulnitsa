@@ -17,11 +17,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class AddToPillboxActivity extends AppCompatActivity {
     private EditText dosage_type, pill_name, tablets_amount, best_before;
@@ -33,7 +32,6 @@ public class AddToPillboxActivity extends AppCompatActivity {
     String[] types = {"Таблетка", "Капля", "Ложка", "Шт", "Шприц", "Мл", "Гр"};
 
     String name;
-
     private Integer size = 0;
 
     public Integer getSize() {
@@ -217,8 +215,9 @@ public class AddToPillboxActivity extends AppCompatActivity {
                     return;
                 }
                 int finalAmount = Integer.parseInt(amount);
-                Pill newPill = new Pill(name, dosage, best, finalAmount); ///
+                Pill newPill = new Pill(name, dosage, best, finalAmount);
                 Pill.pillBox.add(newPill);
+                Pill.pillBox.sort(Comparator.comparing(Pill::getName));
                 SharedPreferences sharedPreferences = getSharedPreferences("Pills", MODE_PRIVATE);
                 int sizze = sharedPreferences.getInt("Size", size);
                 size++;
@@ -241,7 +240,6 @@ public class AddToPillboxActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     private void initWidgets() {
@@ -260,6 +258,4 @@ public class AddToPillboxActivity extends AppCompatActivity {
         syringe = findViewById(R.id.syringe);
         more = findViewById(R.id.more);
     }
-
-
 }

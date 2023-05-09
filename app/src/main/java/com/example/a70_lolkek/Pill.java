@@ -1,7 +1,5 @@
 package com.example.a70_lolkek;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -23,37 +21,58 @@ public class Pill {
         return name;
     }
 
+    public int getTabletsAmount() {
+        return tablets_amount;
+    }
+
+    public static int getTabletsAmount(String name) {
+        for (Pill pill : pillBox) {
+            if (Objects.equals(pill.getName(), name)) {
+                return pill.tablets_amount;
+            }
+        }
+        return 0;
+    }
+
     public String getBestBefore() {
         return best_before;
     }
 
-
-    public String getAmount() {
-        if (tablets_amount % 10 == 1 && tablets_amount != 11) {
-            return tablets_amount + " " + dosage_type;
-        } else if ((tablets_amount % 10 == 2 || tablets_amount % 10 == 3 || tablets_amount % 10 == 4) && tablets_amount != 12 && tablets_amount != 13 && tablets_amount != 14) {
+    public String getAmount(int tablets_amount_pill) {
+        if (tablets_amount_pill % 10 == 1 && tablets_amount_pill != 11) {
+            return dosage_type;
+        } else if ((tablets_amount_pill % 10 == 2 || tablets_amount_pill % 10 == 3 || tablets_amount_pill % 10 == 4) && tablets_amount_pill != 12 && tablets_amount_pill != 13 && tablets_amount_pill != 14) {
             if (Objects.equals(dosage_type, "Таблетка")) {
-                return tablets_amount + " таблетки";
+                return " таблетки";
             } else if (Objects.equals(dosage_type, "Капля")) {
-                return tablets_amount + " капли";
+                return " капли";
             } else if (Objects.equals(dosage_type, "Ложка")) {
-                return tablets_amount + " ложки";
+                return " ложки";
             } else if (Objects.equals(dosage_type, "Шприц")) {
-                return tablets_amount + " шприца";
+                return " шприца";
             } else {
-                return tablets_amount + " " + dosage_type;
+                return dosage_type;
             }
         } else {
             if (Objects.equals(dosage_type, "Таблетка")) {
-                return tablets_amount + " таблеток";
+                return " таблеток";
             } else if (Objects.equals(dosage_type, "Капля")) {
-                return tablets_amount + " капель";
+                return " капель";
             } else if (Objects.equals(dosage_type, "Ложка")) {
-                return tablets_amount + " ложек";
+                return " ложек";
             } else if (Objects.equals(dosage_type, "Шприц")) {
-                return tablets_amount + " шприцов";
+                return " шприцов";
             } else {
-                return tablets_amount + " " + dosage_type;
+                return dosage_type;
+            }
+        }
+    }
+
+    public static void changeAmount(String name, int amount) {
+        for (Pill pill : pillBox) {
+            if (Objects.equals(pill.getName(), name)) {
+                pill.tablets_amount -= amount;
+                break;
             }
         }
     }

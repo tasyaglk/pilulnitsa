@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -58,6 +59,10 @@ public class MainScreen extends AppCompatActivity  implements CalendarAdapter.On
         pill_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (Pill.pillBox.isEmpty()) {
+                    Toast.makeText(view.getContext(), "У вас нет лекарств в Пилюльнице", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 // Здесь добавление лекарства в курс
                 AddToCourseActivity.add_to_course = true;
                 Intent intent = new Intent(MainScreen.this, AddToCourseActivity.class);

@@ -60,13 +60,13 @@ public class Event {
         this.date = date;
     }
 
-    public LocalTime getTime()
+    public int getAmount()
     {
-        return time;
+        return amount;
     }
 
-    public void setTime(LocalTime time)
+    public String getTime()
     {
-        this.time = time;
+        return time_to_take;
     }
 }
