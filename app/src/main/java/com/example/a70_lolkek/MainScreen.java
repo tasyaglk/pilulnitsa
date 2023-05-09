@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,11 +27,12 @@ public class MainScreen extends AppCompatActivity  implements CalendarAdapter.On
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
     private ListView eventListView;
+    BottomNavigationFragment bottomNavigationFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_week_view);
+        setContentView(R.layout.main_screen);
         initWidgets();
         setWeekView();
 
@@ -56,6 +58,7 @@ public class MainScreen extends AppCompatActivity  implements CalendarAdapter.On
             @Override
             public void onClick(View view) {
                 // Здесь добавление лекарства в курс
+                AddToCourseActivity.add_to_course = true;
                 Intent intent = new Intent(MainScreen.this, AddToCourseActivity.class);
                 startActivity(intent);
             }
@@ -63,6 +66,11 @@ public class MainScreen extends AppCompatActivity  implements CalendarAdapter.On
     }
 
     private void initWidgets() {
+        Fragment bottom_fragment = getSupportFragmentManager().findFragmentById(R.id.bottom_navigation_id);
+        if (bottom_fragment instanceof Fragment) {
+            bottomNavigationFragment = (BottomNavigationFragment)bottom_fragment;
+            bottomNavigationFragment.initializeComponents();
+        }
         settings_button = findViewById(R.id.settings_button);
         calendar_button = findViewById(R.id.calendar_button);
         pill_plus = findViewById(R.id.pill_plus);
@@ -115,10 +123,5 @@ public class MainScreen extends AppCompatActivity  implements CalendarAdapter.On
         ArrayList<Event> dailyEvents = Event.eventsForDate(CalendarUtils.selectedDate);
         EventAdapter eventAdapter = new EventAdapter(getApplicationContext(), dailyEvents);
         eventListView.setAdapter(eventAdapter);
-    }
-
-    public void newEventAction(View view)
-    {
-        startActivity(new Intent(this, EventEditActivity.class));
     }
 }
