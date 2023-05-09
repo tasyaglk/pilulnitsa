@@ -42,10 +42,7 @@ public class PillsActivity extends AppCompatActivity {
                 // Здесь будет создаваться новое лекарство
                 Intent intent = new Intent(PillsActivity.this, AddToPillboxActivity.class);
                 startActivity(intent);
-
-                // Создаем и добавляем таблетку в базу данных SharedPreferences
-                // savePillToSharedPreferences("Название таблетки", "Описание таблетки");
-            }
+}
         });
     }
 
