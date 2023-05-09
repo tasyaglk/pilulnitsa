@@ -30,7 +30,7 @@ public class PillAdapter extends ArrayAdapter<Pill>
 
         TextView eventCellTV = convertView.findViewById(R.id.pill_cell);
 
-        String pillTitle = pill.getName() + "      " + pill.getAmount() + "\nгоден до: " + pill.getBestBefore();
+        String pillTitle = pill.getName() + ", " + pill.getTabletsAmount() + pill.getAmount(pill.getTabletsAmount()) + "\nгоден до: " + pill.getBestBefore();
         eventCellTV.setText(pillTitle);
         return convertView;
     }

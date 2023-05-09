@@ -1,5 +1,7 @@
 package com.example.a70_lolkek;
 
+import static java.lang.Thread.sleep;
+
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -8,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +24,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -38,6 +45,7 @@ public class AddToCourseActivity extends AppCompatActivity {
     String[] days = {"Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"};
     String[] endPill = {"Дата", "Кол-во дней", "Кол-во таблеток"};
     String name;
+    Calendar begin_calendar = Calendar.getInstance(), end_calendar = Calendar.getInstance();;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,7 +186,7 @@ public class AddToCourseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // calender class's instance and get current date , month and year from calender
-                final Calendar c = Calendar.getInstance();
+                Calendar c = Calendar.getInstance();
                 int mYear = c.get(Calendar.YEAR); // current year
                 int mMonth = c.get(Calendar.MONTH); // current month
                 int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
@@ -190,6 +198,7 @@ public class AddToCourseActivity extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 beginning.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                begin_calendar.set(year, monthOfYear, dayOfMonth);
 
                             }
                         }, mYear, mMonth, mDay);
@@ -263,7 +272,7 @@ public class AddToCourseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // calender class's instance and get current date , month and year from calender
-                final Calendar c = Calendar.getInstance();
+                Calendar c = Calendar.getInstance();
                 int mYear = c.get(Calendar.YEAR); // current year
                 int mMonth = c.get(Calendar.MONTH); // current month
                 int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
@@ -275,6 +284,7 @@ public class AddToCourseActivity extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 choose_end_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                end_calendar.set(year, monthOfYear, dayOfMonth);
 
                             }
                         }, mYear, mMonth, mDay);
@@ -286,7 +296,7 @@ public class AddToCourseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String dosage = amount.getText().toString();
-                String taking_time = choose_time.toString();
+                String taking_time = String.valueOf(choose_time.getHour()) + ':' + choose_time.getMinute();
                 String taking_method = how_to_take.getText().toString();
 
                 String days = taking_days.getText().toString();
@@ -334,30 +344,99 @@ public class AddToCourseActivity extends AppCompatActivity {
                     return;
                 }
                 // забираем все введенные параметры
-                if (add_to_course) {
-                    int number_d = 0;
-                    int number_p = 0;
+                int number_d = 0;
+                int number_p = 0;
 
-                    int finalAmount = Integer.parseInt(dosage);
-                    if (end.equals(endPill[1])) {
-                        number_d = Integer.parseInt(number_days);
-                    } else if (end.equals(endPill[2])) {
-                        number_p = Integer.parseInt(number_pills);
-                    }
-                    // создаем все события
-                    if (!end_date.matches("")) {
-                        //for ()
-                    }
-                    Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
-                            finalAmount, number_d, number_p, CalendarUtils.selectedDate, mSelectedItems);
-                    Event.eventsList.add(newEvent);
+                int finalAmount = Integer.parseInt(dosage);
+                if (end.equals(endPill[1])) {
+                    number_d = Integer.parseInt(number_days);
+                } else if (end.equals(endPill[2])) {
+                    number_p = Integer.parseInt(number_pills);
+                }
+                // создаем все события
+                int amount = 1;
+                LocalDate begin_local = LocalDateTime.ofInstant(begin_calendar.toInstant(), begin_calendar.getTimeZone().toZoneId()).toLocalDate();
+                LocalDate end_local;
 
-                    Intent intent = new Intent(context, MainScreen.class);
-                    startActivity(intent);
-                } else {
+                long days_number = 0;
+                long counter = 0;
+                int substact = 1;
 
+                if (!end_date.matches("")) { // если указана дата окончания
+                    end_local = LocalDateTime.ofInstant(end_calendar.toInstant(), end_calendar.getTimeZone().toZoneId()).toLocalDate();
+                    days_number = ChronoUnit.DAYS.between(begin_local, end_local);
+                    counter = days_number + 1;
+                } else if (!number_days.matches("")) { // если указано кол-во дней
+                    days_number = number_d;
+                    counter = days_number + 1;
+                } else if (!number_pills.matches("")) { // если указано кол-во таблеток
+                    counter = number_p;
+                    substact = finalAmount;
                 }
 
+                if (days.matches(takingDays[1])) {
+                    amount = 2;
+                } else if (days.matches(takingDays[2])) {
+
+                    while (counter > 0) {
+                        begin_local = LocalDateTime.ofInstant(begin_calendar.toInstant(), begin_calendar.getTimeZone().toZoneId()).toLocalDate();
+                        if (mSelectedItems.contains(0) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) {
+                            Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
+                                    finalAmount, number_d, number_p, begin_local, mSelectedItems);
+                            Event.eventsList.add(newEvent);
+                        } else if (mSelectedItems.contains(1) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.TUESDAY) {
+                            Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
+                                    finalAmount, number_d, number_p, begin_local, mSelectedItems);
+                            Event.eventsList.add(newEvent);
+                        } else if (mSelectedItems.contains(2) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY) {
+                            Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
+                                    finalAmount, number_d, number_p, begin_local, mSelectedItems);
+                            Event.eventsList.add(newEvent);
+                        } else if (mSelectedItems.contains(3) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY) {
+                            Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
+                                    finalAmount, number_d, number_p, begin_local, mSelectedItems);
+                            Event.eventsList.add(newEvent);
+                        } else if (mSelectedItems.contains(4) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
+                            Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
+                                    finalAmount, number_d, number_p, begin_local, mSelectedItems);
+                            Event.eventsList.add(newEvent);
+                        } else if (mSelectedItems.contains(5) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+                            Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
+                                    finalAmount, number_d, number_p, begin_local, mSelectedItems);
+                            Event.eventsList.add(newEvent);
+                        } else if (mSelectedItems.contains(6) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+                            Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
+                                    finalAmount, number_d, number_p, begin_local, mSelectedItems);
+                            Event.eventsList.add(newEvent);
+                        }
+                        counter -= substact;
+                        Pill.changeAmount(name, finalAmount);
+                        begin_calendar.add(Calendar.DATE, 1);
+                    }
+                    if (add_to_course) {
+                        Intent intent = new Intent(context, MainScreen.class);
+                        startActivity(intent);
+                    }
+                }
+
+                // если каждый день или через день принимаем
+                while (counter > 0) {
+                    begin_local = LocalDateTime.ofInstant(begin_calendar.toInstant(), begin_calendar.getTimeZone().toZoneId()).toLocalDate();
+                    Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
+                            finalAmount, number_d, number_p, begin_local, mSelectedItems);
+                    Event.eventsList.add(newEvent);
+
+                    begin_calendar.add(Calendar.DATE, amount);
+
+                    Pill.changeAmount(name, finalAmount);
+
+                    counter -= substact;
+                }
+
+                if (add_to_course) {
+                    Intent intent = new Intent(context, MainScreen.class);
+                    startActivity(intent);
+                }
             }
         });
 

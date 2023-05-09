@@ -35,11 +35,11 @@ public class EventAdapter extends ArrayAdapter<Event>
 
         for (Pill pill : Pill.pillBox) {
             if (Objects.equals(pill.getName(), event.getName())) {
-                amount = pill.getAmount();
+                amount = event.getAmount() + " " + pill.getAmount(event.getAmount());
             }
         }
 
-        String eventTitle = event.getName() +" "+ amount;
+        String eventTitle = event.getName() + " " + amount + " " + event.getTime();
         eventCellTV.setText(eventTitle);
         return convertView;
     }

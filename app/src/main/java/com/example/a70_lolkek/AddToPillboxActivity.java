@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class AddToPillboxActivity extends AppCompatActivity {
     private EditText dosage_type, pill_name, tablets_amount, best_before;
@@ -209,6 +211,7 @@ public class AddToPillboxActivity extends AppCompatActivity {
                 int finalAmount = Integer.parseInt(amount);
                 Pill newPill = new Pill(name, dosage, best, finalAmount);
                 Pill.pillBox.add(newPill);
+                Pill.pillBox.sort(Comparator.comparing(Pill::getName));
 
                 Intent intent = new Intent(AddToPillboxActivity.this, PillsActivity.class);
                 startActivity(intent);
