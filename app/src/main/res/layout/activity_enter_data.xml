@@ -43,7 +43,9 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:ems="10"
-                android:inputType="text"/>
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:inputType="textPersonName"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,8 +69,10 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:ems="10"
-                android:inputType="text"/>
-
+                  
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:inputType="textPersonName"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -82,7 +86,7 @@
                 android:layout_width="337dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:hint="Введите дату рождения"
+                android:hint="@string/enter_birth_date"
                 android:clickable="false"
                 android:cursorVisible="false"
                 android:focusable="false"

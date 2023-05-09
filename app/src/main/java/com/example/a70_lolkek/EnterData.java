@@ -13,12 +13,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class EnterData extends AppCompatActivity {
 
     private EditText surnameEditText, nameEditText, birthDateEditText, phoneNumberEditText;
     private Button continueButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,13 +74,8 @@ public class EnterData extends AppCompatActivity {
                 editor.putString("birthDate", birthDate);
                 editor.putString("phoneNumber", phoneNumber);
                 editor.apply();
-                intent_account.putExtra("surname", surname);
-                intent_account.putExtra("name", name);
-                intent_account.putExtra("birthDate", birthDate);
-                intent_account.putExtra("phoneNumber", phoneNumber);
-                startActivity(intent_account);
 
-                // Переходим на главный экран
+                 //Переходим на главный экран
                 Intent intent = new Intent(EnterData.this, MainScreen.class);
                 startActivity(intent);
             }
