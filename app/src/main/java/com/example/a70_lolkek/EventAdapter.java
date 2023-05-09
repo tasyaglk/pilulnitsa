@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.List;
+import java.util.Objects;
 
 public class EventAdapter extends ArrayAdapter<Event>
 {
@@ -30,7 +31,15 @@ public class EventAdapter extends ArrayAdapter<Event>
 
         TextView eventCellTV = convertView.findViewById(R.id.eventCellTV);
 
-        String eventTitle = event.getName() +" "+ CalendarUtils.formattedTime(event.getTime());
+        String amount = null;
+
+        for (Pill pill : Pill.pillBox) {
+            if (Objects.equals(pill.getName(), event.getName())) {
+                amount = pill.getAmount();
+            }
+        }
+
+        String eventTitle = event.getName() +" "+ amount;
         eventCellTV.setText(eventTitle);
         return convertView;
     }

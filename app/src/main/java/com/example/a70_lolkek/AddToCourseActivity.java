@@ -32,11 +32,13 @@ public class AddToCourseActivity extends AppCompatActivity {
     private Button save_button, go_back;
     Context context;
     ArrayList<Integer> mSelectedItems;
-
+    public static boolean add_to_course = false;
     String[] takePill = {"До еды", "После еды", "Во время еды", "Неважно"};
     String[] takingDays = {"Каждый день", "Через день", "Выбрать дни"};
     String[] days = {"Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"};
     String[] endPill = {"Дата", "Кол-во дней", "Кол-во таблеток"};
+
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +62,7 @@ public class AddToCourseActivity extends AppCompatActivity {
                 ((TextView) parent.getChildAt(0)).setTextSize(20);
                 ((TextView) parent.getChildAt(0)).setTypeface(Typeface.DEFAULT_BOLD);
                 Pill pill = (Pill) parent.getSelectedItem();
-                String name = pill.toString();
+                name = pill.toString();
             }
 
             @Override
@@ -284,7 +286,6 @@ public class AddToCourseActivity extends AppCompatActivity {
         save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = choose_pill.toString();
                 String dosage = amount.getText().toString();
                 String taking_time = choose_time.toString();
                 String taking_method = how_to_take.getText().toString();
@@ -333,12 +334,22 @@ public class AddToCourseActivity extends AppCompatActivity {
                     Toast.makeText(view.getContext(), "Вы не указали количество лекарства для приема", Toast.LENGTH_SHORT).show();
                     return;
                 }
-//                int finalAmount = Integer.parseInt(amount);
-//                Pill newPill = new Pill(name, dosage, best, finalAmount);
-//                Pill.pillBox.add(newPill);
-//
-//                Intent intent = new Intent(context, PillsActivity.class);
-//                startActivity(intent);
+                // забираем все введенные параметры
+                int number_d = 0;
+                int number_p = 0;
+
+                int finalAmount = Integer.parseInt(dosage);
+                if (end.equals(endPill[1])) {
+                    number_d = Integer.parseInt(number_days);
+                } else if (end.equals(endPill[2])) {
+                    number_p = Integer.parseInt(number_pills);
+                }
+                Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
+                                           finalAmount, number_d, number_p, CalendarUtils.selectedDate, mSelectedItems);
+                Event.eventsList.add(newEvent);
+
+                Intent intent = new Intent(context, MainScreen.class);
+                startActivity(intent);
             }
         });
 
@@ -368,5 +379,4 @@ public class AddToCourseActivity extends AppCompatActivity {
         save_button = findViewById(R.id.save_button);
         go_back = findViewById(R.id.go_back);
     }
-
 }
