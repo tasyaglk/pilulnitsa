@@ -48,6 +48,7 @@
     <string name="date_placeholder">01.01.01</string>
     <string name="enter">Вход</string>
     <string name="enterYourData">Введите свои данные</string>
+    <string name="enter_birth_date">Введите дату рождения</string>
 
     <string-array name="days">
         <item>Пн</item>
