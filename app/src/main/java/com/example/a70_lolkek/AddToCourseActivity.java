@@ -30,6 +30,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 
 public class AddToCourseActivity extends AppCompatActivity {
 
@@ -413,8 +414,17 @@ public class AddToCourseActivity extends AppCompatActivity {
                         Pill.changeAmount(name, finalAmount);
                         begin_calendar.add(Calendar.DATE, 1);
                     }
+
+                    CourseItem item = new CourseItem(name, finalAmount);
+                    CourseItem.course.add(item);
+                    CourseItem.course.sort(Comparator.comparing(CourseItem::getName));
+
                     if (add_to_course) {
                         Intent intent = new Intent(context, MainScreen.class);
+                        startActivity(intent);
+                    } else {
+
+                        Intent intent = new Intent(context, CourseActivity.class);
                         startActivity(intent);
                     }
                 }
@@ -433,8 +443,15 @@ public class AddToCourseActivity extends AppCompatActivity {
                     counter -= substact;
                 }
 
+                CourseItem item = new CourseItem(name, finalAmount);
+                CourseItem.course.add(item);
+                CourseItem.course.sort(Comparator.comparing(CourseItem::getName));
+
                 if (add_to_course) {
                     Intent intent = new Intent(context, MainScreen.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(context, CourseActivity.class);
                     startActivity(intent);
                 }
             }

@@ -67,15 +67,5 @@ public class PillsActivity extends AppCompatActivity {
 
         PillAdapter eventAdapter = new PillAdapter(getApplicationContext(), pillList);
         eventListView.setAdapter(eventAdapter);
-
-        pill_plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Здесь будет создаваться новое лекарство
-                Intent intent = new Intent(PillsActivity.this, AddToPillboxActivity.class);
-                startActivity(intent);
-            }
-        });
     }
-
 }

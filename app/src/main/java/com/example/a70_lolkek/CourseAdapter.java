@@ -13,31 +13,31 @@ import androidx.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-public class EventAdapter extends ArrayAdapter<Event> {
-    public EventAdapter(@NonNull Context context, List<Event> events) {
+public class CourseAdapter extends ArrayAdapter<CourseItem> {
+    public CourseAdapter(@NonNull Context context, List<CourseItem> events) {
         super(context, 0, events);
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        Event event = getItem(position);
+        CourseItem item = getItem(position);
 
         if (convertView == null)
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.event_cell, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.pill_cell, parent, false);
 
-        TextView eventCellTV = convertView.findViewById(R.id.eventCellTV);
+        TextView eventCellTV = convertView.findViewById(R.id.pill_cell);
 
         String amount = null;
 
         for (Pill pill : Pill.pillBox) {
-            if (Objects.equals(pill.getName(), event.getName())) {
-                amount = event.getAmount() + " " + pill.getAmount(event.getAmount());
+            if (Objects.equals(pill.getName(), item.getName())) {
+                amount = item.getAmount() + " " + pill.getAmount(item.getAmount());
             }
         }
 
-        String eventTitle = event.getName() + ", " + amount + ", " + event.getTime();
-        eventCellTV.setText(eventTitle);
+        String pillTitle = item.getName() + ", " + amount;
+        eventCellTV.setText(pillTitle);
         return convertView;
     }
 }
