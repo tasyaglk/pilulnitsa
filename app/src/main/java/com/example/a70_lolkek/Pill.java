@@ -27,6 +27,7 @@ public class Pill {
         return best_before;
     }
 
+
     public String getAmount() {
         if (tablets_amount % 10 == 1 && tablets_amount != 11) {
             return tablets_amount + " " + dosage_type;

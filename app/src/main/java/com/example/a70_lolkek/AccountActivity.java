@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ public class AccountActivity extends AppCompatActivity {
     private TextView nameTextView;
     private TextView birthDateTextView;
     private TextView phoneNumberTextView;
+    private Button button_course;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,13 @@ public class AccountActivity extends AppCompatActivity {
         nameTextView.setText(name);
         birthDateTextView.setText(birthDate);
         phoneNumberTextView.setText(phoneNumber);
+
+        button_course = findViewById(R.id.course);
+
+        button_course.setOnClickListener(view -> {
+            Intent intent = new Intent(AccountActivity.this, CourseActivity.class);
+            startActivity(intent);
+        });
         Fragment bottom_fragment = getSupportFragmentManager().findFragmentById(R.id.bottom_navigation_id);
         if (bottom_fragment instanceof Fragment) {
             bottomNavigationFragment = (BottomNavigationFragment)bottom_fragment;

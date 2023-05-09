@@ -17,8 +17,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class AddToPillboxActivity extends AppCompatActivity {
     private EditText dosage_type, pill_name, tablets_amount, best_before;
@@ -30,6 +33,12 @@ public class AddToPillboxActivity extends AppCompatActivity {
     String[] types = {"Таблетка", "Капля", "Ложка", "Шт", "Шприц", "Мл", "Гр"};
 
     String name;
+
+    private Integer size = 0;
+
+    public Integer getSize() {
+        return size;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,9 +217,18 @@ public class AddToPillboxActivity extends AppCompatActivity {
                     return;
                 }
                 int finalAmount = Integer.parseInt(amount);
-                Pill newPill = new Pill(name, dosage, best, finalAmount);
+                Pill newPill = new Pill(name, dosage, best, finalAmount); ///
                 Pill.pillBox.add(newPill);
-
+                SharedPreferences sharedPreferences = getSharedPreferences("Pills", MODE_PRIVATE);
+                int sizze = sharedPreferences.getInt("Size", size);
+                size++;
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("Name_" + sizze, name);
+                editor.putString("Dosage_" + sizze, dosage);
+                editor.putString("Best_" + sizze, best);
+                editor.putInt("FinalAmount_" + sizze, finalAmount);
+                editor.putInt("Size", sizze + 1);
+                editor.apply();
                 Intent intent = new Intent(AddToPillboxActivity.this, PillsActivity.class);
                 startActivity(intent);
             }
@@ -242,4 +260,6 @@ public class AddToPillboxActivity extends AppCompatActivity {
         syringe = findViewById(R.id.syringe);
         more = findViewById(R.id.more);
     }
+
+
 }
