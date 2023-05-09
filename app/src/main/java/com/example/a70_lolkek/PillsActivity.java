@@ -31,7 +31,7 @@ public class PillsActivity extends AppCompatActivity {
 
         Fragment bottom_fragment = getSupportFragmentManager().findFragmentById(R.id.bottom_navigation_id);
         if (bottom_fragment instanceof Fragment) {
-            bottomNavigationFragment = (BottomNavigationFragment)bottom_fragment;
+            bottomNavigationFragment = (BottomNavigationFragment) bottom_fragment;
             bottomNavigationFragment.initializeComponents();
         }
 
@@ -44,7 +44,7 @@ public class PillsActivity extends AppCompatActivity {
                 startActivity(intent);
 
                 // Создаем и добавляем таблетку в базу данных SharedPreferences
-               // savePillToSharedPreferences("Название таблетки", "Описание таблетки");
+                // savePillToSharedPreferences("Название таблетки", "Описание таблетки");
             }
         });
     }
@@ -77,9 +77,6 @@ public class PillsActivity extends AppCompatActivity {
                 // Здесь будет создаваться новое лекарство
                 Intent intent = new Intent(PillsActivity.this, AddToPillboxActivity.class);
                 startActivity(intent);
-
-                // Создаем и добавляем таблетку в базу данных SharedPreferences
-                //savePillToSharedPreferences("Название таблетки", "Описание таблетки");
             }
         });
     }
