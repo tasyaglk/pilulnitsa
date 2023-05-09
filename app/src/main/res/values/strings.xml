@@ -7,7 +7,7 @@
     <string name="mainwords">Приложение для ведения учета лекарственных препаратов</string>
     <string name="phonenumber">Вход по номеру телефона</string>
     <string name="registration">Регистрация</string>
-    <string name="addphonenumber">Введите свой номер телефона</string>
+    <string name="addphonenumber">Введите номер телефона</string>
     <string name="codeFromSMS">Введите код из СМС</string>
     <string name="tryWriteCode">Мы отправили код подтверждения на номер</string>
     <string name="code">- - - -</string>
@@ -45,6 +45,9 @@
     <string name="birth_date">Дата Рождения</string>
     <string name="name">Имя</string>
     <string name="surname">Фамилия</string>
+    <string name="date_placeholder">01.01.01</string>
+    <string name="enter">Вход</string>
+    <string name="enterYourData">Введите свои данные</string>
 
     <string-array name="days">
         <item>Пн</item>

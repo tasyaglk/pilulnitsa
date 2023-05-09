@@ -18,6 +18,16 @@
             android:name=".CourseActivity"
             android:exported="false" />
         <activity
+            android:name=".CalendarAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity2"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AddToPillboxActivity"
             android:exported="false" />
         <activity
@@ -58,7 +68,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".EnterNumber"
+            android:name=".EnterData"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

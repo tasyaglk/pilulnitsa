@@ -21,16 +21,16 @@ public class MainActivity extends AppCompatActivity {
         button_enter = findViewById(R.id.button2);
         button_registration = findViewById(R.id.button3);
 
-//        button_enter.setOnClickListener(view -> {
-//            // Обработчик для кнопки "Номер телефона"
-//            // TODO: Действия при нажатии на кнопку "Номер телефона"
-//        });
+        button_enter.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, MainScreen.class);
+            startActivity(intent);
+        });
 
         button_registration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Переходим на окно EnterNumber
-                Intent intent = new Intent(MainActivity.this, EnterNumber.class);
+                Intent intent = new Intent(MainActivity.this, EnterData.class);
                 startActivity(intent);
             }
         });
