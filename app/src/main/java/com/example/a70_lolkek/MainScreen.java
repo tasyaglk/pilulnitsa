@@ -2,6 +2,7 @@ package com.example.a70_lolkek;
 
 import static com.example.a70_lolkek.CalendarUtils.daysInMonthArray;
 import static com.example.a70_lolkek.CalendarUtils.daysInWeekArray;
+import static com.example.a70_lolkek.CalendarUtils.formattedDate;
 import static com.example.a70_lolkek.CalendarUtils.monthYearFromDate;
 
 import android.content.Intent;
@@ -79,9 +80,10 @@ public class MainScreen extends AppCompatActivity  implements CalendarAdapter.On
         eventListView = findViewById(R.id.eventListView);
         CalendarUtils.selectedDate = LocalDate.now();
     }
+
     private void setWeekView()
     {
-        monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
+        monthYearText.setText(formattedDate(CalendarUtils.selectedDate));
         ArrayList<LocalDate> days = daysInWeekArray(CalendarUtils.selectedDate);
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(days, this);
@@ -91,15 +93,12 @@ public class MainScreen extends AppCompatActivity  implements CalendarAdapter.On
         setEventAdpater();
     }
 
-
-    public void previousWeekAction(View view)
-    {
+    public void previousWeekAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
         setWeekView();
     }
 
-    public void nextWeekAction(View view)
-    {
+    public void nextWeekAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
         setWeekView();
     }
@@ -107,21 +106,18 @@ public class MainScreen extends AppCompatActivity  implements CalendarAdapter.On
     @Override
     public void onItemClick(int position, LocalDate date)
     {
-        monthYearText.setText(monthYearFromDate(CalendarUtils.selectedDate));
-
+        monthYearText.setText(formattedDate(CalendarUtils.selectedDate));
         CalendarUtils.selectedDate = date;
         setWeekView();
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
         setEventAdpater();
     }
 
-    private void setEventAdpater()
-    {
+    private void setEventAdpater() {
         ArrayList<Event> dailyEvents = Event.eventsForDate(CalendarUtils.selectedDate);
         EventAdapter eventAdapter = new EventAdapter(getApplicationContext(), dailyEvents);
         eventListView.setAdapter(eventAdapter);
