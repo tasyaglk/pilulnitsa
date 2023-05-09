@@ -6,6 +6,7 @@ import static com.example.a70_lolkek.CalendarUtils.formattedDate;
 import static com.example.a70_lolkek.CalendarUtils.monthYearFromDate;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -59,7 +60,9 @@ public class MainScreen extends AppCompatActivity  implements CalendarAdapter.On
         pill_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Pill.pillBox.isEmpty()) {
+                SharedPreferences sharedPreferences = getSharedPreferences("Pills", MODE_PRIVATE);
+                int size = sharedPreferences.getInt("Size", 0);
+                if (size == 0) {
                     Toast.makeText(view.getContext(), "У вас нет лекарств в Пилюльнице", Toast.LENGTH_SHORT).show();
                     return;
                 }
