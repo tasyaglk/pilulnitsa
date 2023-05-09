@@ -42,7 +42,7 @@ public class PillsActivity extends AppCompatActivity {
                 // Здесь будет создаваться новое лекарство
                 Intent intent = new Intent(PillsActivity.this, AddToPillboxActivity.class);
                 startActivity(intent);
-}
+            }
         });
     }
 
