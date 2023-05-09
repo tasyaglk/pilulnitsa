@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.a70_lolkek"
-        minSdk 24
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -48,9 +48,11 @@ android {
 }
 
 dependencies {
+    //for event circles
+    implementation 'com.github.3llomi:CircularStatusView:V1.0.3'
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
     implementation 'androidx.activity:activity-compose:1.7.1'
