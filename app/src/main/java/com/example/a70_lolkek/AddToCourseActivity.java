@@ -419,14 +419,13 @@ public class AddToCourseActivity extends AppCompatActivity {
                     CourseItem.course.add(item);
                     CourseItem.course.sort(Comparator.comparing(CourseItem::getName));
 
+                    Intent intent;
                     if (add_to_course) {
-                        Intent intent = new Intent(context, MainScreen.class);
-                        startActivity(intent);
+                        intent = new Intent(context, MainScreen.class);
                     } else {
-
-                        Intent intent = new Intent(context, CourseActivity.class);
-                        startActivity(intent);
+                        intent = new Intent(context, CourseActivity.class);
                     }
+                    startActivity(intent);
                 }
 
                 // если каждый день или через день принимаем
@@ -447,13 +446,13 @@ public class AddToCourseActivity extends AppCompatActivity {
                 CourseItem.course.add(item);
                 CourseItem.course.sort(Comparator.comparing(CourseItem::getName));
 
+                Intent intent;
                 if (add_to_course) {
-                    Intent intent = new Intent(context, MainScreen.class);
-                    startActivity(intent);
+                    intent = new Intent(context, MainScreen.class);
                 } else {
-                    Intent intent = new Intent(context, CourseActivity.class);
-                    startActivity(intent);
+                    intent = new Intent(context, CourseActivity.class);
                 }
+                startActivity(intent);
             }
         });
 

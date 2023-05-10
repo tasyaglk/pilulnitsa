@@ -32,7 +32,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
         for (Pill pill : Pill.pillBox) {
             if (Objects.equals(pill.getName(), event.getName())) {
-                amount = event.getAmount() + " " + pill.getAmount(event.getAmount());
+                amount = event.getAmount() + pill.getAmount(event.getAmount());
             }
         }
 

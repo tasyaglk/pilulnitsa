@@ -1,7 +1,6 @@
 package com.example.a70_lolkek;
 
 import static com.example.a70_lolkek.CourseItem.course;
-import static com.example.a70_lolkek.Pill.pillBox;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,9 +12,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CourseActivity extends AppCompatActivity {
 

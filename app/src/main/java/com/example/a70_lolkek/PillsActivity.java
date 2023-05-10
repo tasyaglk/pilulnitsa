@@ -4,12 +4,17 @@ import static com.example.a70_lolkek.Pill.pillBox;
 
 import static java.lang.Integer.parseInt;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -23,6 +28,8 @@ public class PillsActivity extends AppCompatActivity {
     BottomNavigationFragment bottomNavigationFragment;
     private ListView eventListView;
 
+    Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +42,42 @@ public class PillsActivity extends AppCompatActivity {
             bottomNavigationFragment.initializeComponents();
         }
 
-
         pill_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Здесь будет создаваться новое лекарство
-                Intent intent = new Intent(PillsActivity.this, AddToPillboxActivity.class);
+                Intent intent = new Intent(context, AddToPillboxActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        eventListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                String title = "Удаление";
+                String message = "Это лекарство находится в курсе приема. Вы действительно хотите его удалить";
+                String button1String = "Да";
+                String button2String = "Нет";
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle(title);  // заголовок
+                builder.setMessage(message); // сообщение
+                builder.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Toast.makeText(context, "Вы сделали правильный выбор",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder.setNegativeButton(button2String, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Toast.makeText(context, "Возможно вы правы", Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+                builder.setCancelable(true);
+
+                builder.create();
             }
         });
     }
@@ -50,6 +86,7 @@ public class PillsActivity extends AppCompatActivity {
     private void initWidgets() {
         pill_plus = findViewById(R.id.pill_plus);
         eventListView = findViewById(R.id.pillListView);
+        context = this;
 
         // Читаем сохраненные таблетки из SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences("Pills", MODE_PRIVATE);
