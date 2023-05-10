@@ -28,8 +28,8 @@ public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.
         progressView = itemView.findViewById(R.id.cellProgressBar);
 
         this.onItemListener = onItemListener;
-        itemView.setOnClickListener(this);
         this.days = days;
+        itemView.setOnClickListener(this);
     }
 
     @Override
