@@ -77,6 +77,10 @@ public class Pill {
         }
     }
 
+    public static void deleteFromPills(String name) {
+        pillBox.removeIf(item -> Objects.equals(name, item.getName()));
+    }
+
     @Override
     public String toString() {
         return this.name;

@@ -61,7 +61,8 @@ public class AddToCourseActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("Pills", MODE_PRIVATE);
         int size = sharedPreferences.getInt("Size", 0);
         List<Pill> pillList = new ArrayList<Pill>();
-// Создаем список таблеток и добавляем в него все сохраненные таблетки
+
+        // Создаем список таблеток и добавляем в него все сохраненные таблетки
         for (int i = 0; i < size; i++) {
             String name = sharedPreferences.getString("Name_" + i, "");
             String dosage = sharedPreferences.getString("Dosage_" + i, "");
@@ -71,6 +72,7 @@ public class AddToCourseActivity extends AppCompatActivity {
             pillList.add(pill);
         }
 
+        ArrayAdapter<Pill> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, pillList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         choose_pill.setAdapter(adapter);
 
