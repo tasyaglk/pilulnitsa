@@ -1,6 +1,7 @@
 package com.example.a70_lolkek;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -29,6 +31,16 @@ public class EventAdapter extends ArrayAdapter<Event> {
         TextView eventCellTV = convertView.findViewById(R.id.eventCellTV);
 
         String amount = null;
+
+//        SharedPreferences sharedPreferences = getSharedPreferences("Course", MODE_PRIVATE);
+//        int size = sharedPreferences.getInt("Size", 0);
+//        List<CourseItem> itemList = new ArrayList<>();
+//        for (int i = 0; i < size; i++) {
+//            String name = sharedPreferences.getString("Name_" + i, "");
+//            int amount = sharedPreferences.getInt("CntToTake_" + i, 0);
+//            CourseItem item = new CourseItem(name, amount);
+//            itemList.add(item);
+//        }
 
         for (Pill pill : Pill.pillBox) {
             if (Objects.equals(pill.getName(), event.getName())) {

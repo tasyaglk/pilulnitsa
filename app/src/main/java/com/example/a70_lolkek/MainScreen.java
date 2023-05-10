@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainScreen extends AppCompatActivity  implements CalendarAdapter.OnItemListener {
 
@@ -38,6 +39,22 @@ public class MainScreen extends AppCompatActivity  implements CalendarAdapter.On
         setContentView(R.layout.main_screen);
         initWidgets();
         setWeekView();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("Pills", MODE_PRIVATE);
+        int size = sharedPreferences.getInt("Size", 0);
+        List<Pill> pillList = new ArrayList<Pill>();
+
+        // Создаем список таблеток и добавляем в него все сохраненные таблетки
+        for (int i = 0; i < size; i++) {
+            String name = sharedPreferences.getString("Name_" + i, "");
+            String dosage = sharedPreferences.getString("Dosage_" + i, "");
+            String best = sharedPreferences.getString("Best_" + i, "");
+            int finalAmount = sharedPreferences.getInt("FinalAmount_" + i, 0);
+            Pill pill = new Pill(name, dosage, best, finalAmount);
+            pillList.add(pill);
+            Pill newPill = new Pill(name, dosage, best, finalAmount);
+            Pill.pillBox.add(newPill);
+        }
 
         settings_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,8 +144,22 @@ public class MainScreen extends AppCompatActivity  implements CalendarAdapter.On
     }
 
     private void setEventAdpater() {
-        ArrayList<Event> dailyEvents = Event.eventsForDate(CalendarUtils.selectedDate);
-        EventAdapter eventAdapter = new EventAdapter(getApplicationContext(), dailyEvents);
+        // Получение сохраненных данных и создание списка dailyEvents
+        //ArrayList<Event> dailyEvents = new ArrayList<>();
+        // Здесь нужно заполнить список dailyEvents из сохраненных данных
+        SharedPreferences sharedPreferences = getSharedPreferences("Course", MODE_PRIVATE);
+        int size = sharedPreferences.getInt("Size", 0);
+        List<CourseItem> itemList = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            String name = sharedPreferences.getString("Name_" + i, "");
+            int amount = sharedPreferences.getInt("CntToTake_" + i, 0);
+            CourseItem item = new CourseItem(name, amount);
+            itemList.add(item);
+        }
+        // Создание EventAdapter с dailyEvents и установка его для eventListView
+//        EventAdapter eventAdapter = new EventAdapter(getApplicationContext(), itemList);
+//        eventListView.setAdapter(eventAdapter);
+        CourseAdapter eventAdapter = new CourseAdapter(getApplicationContext(), itemList);
         eventListView.setAdapter(eventAdapter);
     }
 }

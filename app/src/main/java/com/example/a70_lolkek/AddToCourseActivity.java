@@ -70,6 +70,8 @@ public class AddToCourseActivity extends AppCompatActivity {
             int finalAmount = sharedPreferences.getInt("FinalAmount_" + i, 0);
             Pill pill = new Pill(name, dosage, best, finalAmount);
             pillList.add(pill);
+            Pill newPill = new Pill(name, dosage, best, finalAmount);
+            Pill.pillBox.add(newPill);
         }
 
         ArrayAdapter<Pill> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, pillList);
@@ -430,6 +432,14 @@ public class AddToCourseActivity extends AppCompatActivity {
 
                     CourseItem item = new CourseItem(name, finalAmount);
                     CourseItem.course.add(item);
+                    SharedPreferences sharedPreferences = getSharedPreferences("Course", MODE_PRIVATE);
+                    int size = sharedPreferences.getInt("Size", 0);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("Name_" + size, name);
+                    editor.putString("Dosage_" + size, dosage);
+                    editor.putString("CntToTake" + size, Integer.toString(finalAmount));
+                    editor.putInt("Size", size + 1);
+                    editor.apply();
                     CourseItem.course.sort(Comparator.comparing(CourseItem::getName));
 
                     Intent intent;
