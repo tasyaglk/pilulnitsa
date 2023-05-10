@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class PillsActivity extends AppCompatActivity {
@@ -56,6 +57,7 @@ public class PillsActivity extends AppCompatActivity {
                 // проверка на то, находится ли лекарство в курсе приема
                 Pill selected = (Pill) eventListView.getItemAtPosition(position);
                 String name = selected.getName();
+                Log.d("name", name);
                 boolean isIn = CourseItem.checkInCourse(name);
                 String message = "Вы действительно хотите удалить это лекарство?";
                 if (isIn) {
@@ -73,16 +75,18 @@ public class PillsActivity extends AppCompatActivity {
                                         }
                                         SharedPreferences sharedPreferences = getSharedPreferences("Pills", MODE_PRIVATE);
                                         int size = sharedPreferences.getInt("Size", 0);
-                                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                                        editor.remove("Name_" + name);
-                                        editor.remove("Dosage_" + name);
-                                        editor.remove("Best_" + name);
-                                        editor.remove("FinalAmount_" + name);
-                                        editor.putInt("Size", size - 1);
-                                        editor.apply();
+                                        for (int i = 0; i < size; i++) {
+                                            String name_sh = sharedPreferences.getString("Name_" + i, "");
+                                            if (name_sh.equals(name)) {
+                                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                editor.putString("Name_" + i, "-1");
+                                                editor.apply();
+                                                break;
+                                            }
+                                        }
+                                        dialog.cancel();
                                         Intent intent = new Intent(context, context.getClass());
                                         startActivity(intent);
-                                        dialog.cancel();
                                     }
                                 })
                         .setNegativeButton("НЕТ", new DialogInterface.OnClickListener() {
@@ -110,9 +114,13 @@ public class PillsActivity extends AppCompatActivity {
             String dosage = sharedPreferences.getString("Dosage_" + i, "");
             String best = sharedPreferences.getString("Best_" + i, "");
             int finalAmount = sharedPreferences.getInt("FinalAmount_" + i, 0);
-            Pill pill = new Pill(name, dosage, best, finalAmount);
-            pillList.add(pill);
+            if (!name.equals("-1")) {
+                Pill pill = new Pill(name, dosage, best, finalAmount);
+                pillList.add(pill);
+            }
         }
+
+        pillList.sort(Comparator.comparing(Pill::getName));
 
         PillAdapter eventAdapter = new PillAdapter(getApplicationContext(), pillList);
         eventListView.setAdapter(eventAdapter);

@@ -68,10 +68,11 @@ public class AddToCourseActivity extends AppCompatActivity {
             String dosage = sharedPreferences.getString("Dosage_" + i, "");
             String best = sharedPreferences.getString("Best_" + i, "");
             int finalAmount = sharedPreferences.getInt("FinalAmount_" + i, 0);
-            Pill pill = new Pill(name, dosage, best, finalAmount);
-            pillList.add(pill);
-            Pill newPill = new Pill(name, dosage, best, finalAmount);
-            Pill.pillBox.add(newPill);
+            if (!name.equals("-1")) {
+                Pill pill = new Pill(name, dosage, best, finalAmount);
+                pillList.add(pill);
+                Pill.pillBox.add(pill);
+            }
         }
 
         ArrayAdapter<Pill> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, pillList);
@@ -227,7 +228,7 @@ public class AddToCourseActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // здесь нужно доделать 3 вида
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Дни приема");
+                builder.setTitle("Окончание по:");
                 builder.setItems(endPill, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
