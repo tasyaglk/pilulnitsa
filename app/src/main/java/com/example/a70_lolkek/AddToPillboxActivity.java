@@ -217,6 +217,16 @@ public class AddToPillboxActivity extends AppCompatActivity {
                 int finalAmount = Integer.parseInt(amount);
                 Pill newPill = new Pill(name, dosage, best, finalAmount);
                 Pill.pillBox.add(newPill);
+                SharedPreferences sharedPreferences = getSharedPreferences("Pills", MODE_PRIVATE);
+                int size = sharedPreferences.getInt("Size", 0);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("Name_" + size, name);
+                editor.putString("Dosage_" + size, dosage);
+                editor.putString("Best_" + size, best);
+                editor.putInt("FinalAmount_" + size, finalAmount);
+                editor.putInt("Size", size + 1);
+                editor.apply();
+
                 Pill.pillBox.sort(Comparator.comparing(Pill::getName));
                 Intent intent = new Intent(AddToPillboxActivity.this, PillsActivity.class);
                 startActivity(intent);

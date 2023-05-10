@@ -104,5 +104,6 @@ public class PillsActivity extends AppCompatActivity {
 
         PillAdapter eventAdapter = new PillAdapter(getApplicationContext(), pillList);
         eventListView.setAdapter(eventAdapter);
+
     }
 }

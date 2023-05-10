@@ -7,6 +7,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
+import java.util.List;
 
 public class AddToCourseActivity extends AppCompatActivity {
 
@@ -56,11 +58,20 @@ public class AddToCourseActivity extends AppCompatActivity {
         initWidgets();
         context = this;
 
-        ArrayAdapter<Pill> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Pill.pillBox);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        SharedPreferences sharedPreferences = getSharedPreferences("Pills", MODE_PRIVATE);
+        int size = sharedPreferences.getInt("Size", 0);
+        List<Pill> pillList = new ArrayList<Pill>();
+// Создаем список таблеток и добавляем в него все сохраненные таблетки
+        for (int i = 0; i < size; i++) {
+            String name = sharedPreferences.getString("Name_" + i, "");
+            String dosage = sharedPreferences.getString("Dosage_" + i, "");
+            String best = sharedPreferences.getString("Best_" + i, "");
+            int finalAmount = sharedPreferences.getInt("FinalAmount_" + i, 0);
+            Pill pill = new Pill(name, dosage, best, finalAmount);
+            pillList.add(pill);
+        }
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         choose_pill.setAdapter(adapter);
 
         choose_pill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
