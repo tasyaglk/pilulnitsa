@@ -41,8 +41,10 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder>
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position)
     {
         final LocalDate date = days.get(position);
-        if(date == null)
+        if(date == null) {
             holder.dayOfMonth.setText("");
+            holder.progressView.setVisibility(View.GONE);
+        }
         else
         {
             holder.dayOfMonth.setText(String.valueOf(date.getDayOfMonth()));
