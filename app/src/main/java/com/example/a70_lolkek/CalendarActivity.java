@@ -61,11 +61,12 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
     }
 
     @Override
-    public void onItemClick(int position, LocalDate date) {
-        if (date != null) {
+    public void onItemClick(int position, LocalDate date)
+    {
+        if(date != null)
+        {
             CalendarUtils.selectedDate = date;
-            Intent intent = new Intent(CalendarActivity.this, MainScreen.class);
-            startActivity(intent);
+            setMonthView();
         }
     }
 
