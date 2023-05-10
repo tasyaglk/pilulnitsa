@@ -29,7 +29,7 @@ public class AddToPillboxActivity extends AppCompatActivity {
 
     boolean clickedImage = false;
     Context context;
-    String[] types = {"Таблетка", "Капля", "Ложка", "Шт", "Шприц", "Мл", "Гр"};
+    String[] types = {"таблетка", "капля", "ложка", "шт", "шприц", "мл", "гр"};
 
     String name;
     private Integer size = 0;

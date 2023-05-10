@@ -31,6 +31,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.List;
 
 public class AddToCourseActivity extends AppCompatActivity {
@@ -60,7 +61,8 @@ public class AddToCourseActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("Pills", MODE_PRIVATE);
         int size = sharedPreferences.getInt("Size", 0);
         List<Pill> pillList = new ArrayList<Pill>();
-// Создаем список таблеток и добавляем в него все сохраненные таблетки
+
+        // Создаем список таблеток и добавляем в него все сохраненные таблетки
         for (int i = 0; i < size; i++) {
             String name = sharedPreferences.getString("Name_" + i, "");
             String dosage = sharedPreferences.getString("Dosage_" + i, "");
@@ -69,11 +71,6 @@ public class AddToCourseActivity extends AppCompatActivity {
             Pill pill = new Pill(name, dosage, best, finalAmount);
             pillList.add(pill);
         }
-
-//        Pill[] pillNames = new Pill[pillList.size()];
-//        for (int i = 0; i < pillList.size(); i++) {
-//            pillNames[i] = (Pill) pillList.get(i).getName();
-//        }
 
         ArrayAdapter<Pill> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, pillList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -430,10 +427,18 @@ public class AddToCourseActivity extends AppCompatActivity {
                         Pill.changeAmount(name, finalAmount);
                         begin_calendar.add(Calendar.DATE, 1);
                     }
+
+                    CourseItem item = new CourseItem(name, finalAmount);
+                    CourseItem.course.add(item);
+                    CourseItem.course.sort(Comparator.comparing(CourseItem::getName));
+
+                    Intent intent;
                     if (add_to_course) {
-                        Intent intent = new Intent(context, MainScreen.class);
-                        startActivity(intent);
+                        intent = new Intent(context, MainScreen.class);
+                    } else {
+                        intent = new Intent(context, CourseActivity.class);
                     }
+                    startActivity(intent);
                 }
 
                 // если каждый день или через день принимаем
@@ -450,10 +455,17 @@ public class AddToCourseActivity extends AppCompatActivity {
                     counter -= substact;
                 }
 
+                CourseItem item = new CourseItem(name, finalAmount);
+                CourseItem.course.add(item);
+                CourseItem.course.sort(Comparator.comparing(CourseItem::getName));
+
+                Intent intent;
                 if (add_to_course) {
-                    Intent intent = new Intent(context, MainScreen.class);
-                    startActivity(intent);
+                    intent = new Intent(context, MainScreen.class);
+                } else {
+                    intent = new Intent(context, CourseActivity.class);
                 }
+                startActivity(intent);
             }
         });
 

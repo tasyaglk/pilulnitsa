@@ -86,11 +86,12 @@ public class MainScreen extends AppCompatActivity  implements CalendarAdapter.On
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         monthYearText = findViewById(R.id.monthYearTV);
         eventListView = findViewById(R.id.eventListView);
-        CalendarUtils.selectedDate = LocalDate.now();
+        if (CalendarUtils.selectedDate == null) {
+            CalendarUtils.selectedDate = LocalDate.now();
+        }
     }
 
-    private void setWeekView()
-    {
+    private void setWeekView() {
         monthYearText.setText(formattedDate(CalendarUtils.selectedDate));
         ArrayList<LocalDate> days = daysInWeekArray(CalendarUtils.selectedDate);
 

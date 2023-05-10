@@ -3,6 +3,7 @@ package com.example.a70_lolkek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Event {
 
@@ -36,7 +37,7 @@ public class Event {
             if (event.getDate().equals(date))
                 events.add(event);
         }
-
+        events.sort(Comparator.comparing(Event::getName));
         return events;
     }
 

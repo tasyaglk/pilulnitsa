@@ -42,25 +42,25 @@ public class Pill {
         if (tablets_amount_pill % 10 == 1 && tablets_amount_pill != 11) {
             return dosage_type;
         } else if ((tablets_amount_pill % 10 == 2 || tablets_amount_pill % 10 == 3 || tablets_amount_pill % 10 == 4) && tablets_amount_pill != 12 && tablets_amount_pill != 13 && tablets_amount_pill != 14) {
-            if (Objects.equals(dosage_type, "Таблетка")) {
+            if (Objects.equals(dosage_type, "таблетка")) {
                 return " таблетки";
-            } else if (Objects.equals(dosage_type, "Капля")) {
+            } else if (Objects.equals(dosage_type, "капля")) {
                 return " капли";
-            } else if (Objects.equals(dosage_type, "Ложка")) {
+            } else if (Objects.equals(dosage_type, "ложка")) {
                 return " ложки";
-            } else if (Objects.equals(dosage_type, "Шприц")) {
+            } else if (Objects.equals(dosage_type, "шприц")) {
                 return " шприца";
             } else {
                 return dosage_type;
             }
         } else {
-            if (Objects.equals(dosage_type, "Таблетка")) {
+            if (Objects.equals(dosage_type, "таблетка")) {
                 return " таблеток";
-            } else if (Objects.equals(dosage_type, "Капля")) {
+            } else if (Objects.equals(dosage_type, "капля")) {
                 return " капель";
-            } else if (Objects.equals(dosage_type, "Ложка")) {
+            } else if (Objects.equals(dosage_type, "ложка")) {
                 return " ложек";
-            } else if (Objects.equals(dosage_type, "Шприц")) {
+            } else if (Objects.equals(dosage_type, "шприц")) {
                 return " шприцов";
             } else {
                 return dosage_type;
@@ -75,6 +75,10 @@ public class Pill {
                 break;
             }
         }
+    }
+
+    public static void deleteFromPills(String name) {
+        pillBox.removeIf(item -> Objects.equals(name, item.getName()));
     }
 
     @Override

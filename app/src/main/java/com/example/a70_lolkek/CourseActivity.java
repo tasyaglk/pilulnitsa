@@ -1,10 +1,13 @@
 package com.example.a70_lolkek;
 
+import static com.example.a70_lolkek.CourseItem.course;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +18,7 @@ public class CourseActivity extends AppCompatActivity {
     BottomNavigationFragment bottomNavigationFragment;
     Context context;
     private ImageView pill_plus;
+    private ListView eventListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +41,17 @@ public class CourseActivity extends AppCompatActivity {
                     Toast.makeText(view.getContext(), "У вас нет лекарств в Пилюльнице", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Intent intent = new Intent(context, PillsActivity.class);
+                AddToCourseActivity.add_to_course = false;
+                Intent intent = new Intent(context, AddToCourseActivity.class);
                 startActivity(intent);
             }
         });
     }
 
     private void initWidgets() {
+        eventListView = findViewById(R.id.pillListView);
         pill_plus = findViewById(R.id.pill_plus);
+        CourseAdapter eventAdapter = new CourseAdapter(getApplicationContext(), course);
+        eventListView.setAdapter(eventAdapter);
     }
 }
