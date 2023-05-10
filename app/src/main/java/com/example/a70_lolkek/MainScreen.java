@@ -79,14 +79,15 @@ public class MainScreen extends AppCompatActivity  implements CalendarAdapter.On
             public void onClick(View view) {
                 SharedPreferences sharedPreferences = getSharedPreferences("Pills", MODE_PRIVATE);
                 int size = sharedPreferences.getInt("Size", 0);
-                if (size == 0) {
-                    Toast.makeText(view.getContext(), "У вас нет лекарств в Пилюльнице", Toast.LENGTH_SHORT).show();
-                    return;
+                for (int i = 0; i < size; i++) {
+                    String name = sharedPreferences.getString("Name_" + i, "");
+                    if (!name.equals("-1")) {
+                        AddToCourseActivity.add_to_course = true;
+                        Intent intent = new Intent(MainScreen.this, AddToCourseActivity.class);
+                        startActivity(intent);
+                    }
                 }
-                // Здесь добавление лекарства в курс
-                AddToCourseActivity.add_to_course = true;
-                Intent intent = new Intent(MainScreen.this, AddToCourseActivity.class);
-                startActivity(intent);
+                Toast.makeText(view.getContext(), "У вас нет лекарств в Пилюльнице", Toast.LENGTH_SHORT).show();
             }
         });
     }

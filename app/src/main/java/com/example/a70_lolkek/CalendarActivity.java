@@ -67,6 +67,8 @@ public class CalendarActivity extends AppCompatActivity implements CalendarAdapt
         {
             CalendarUtils.selectedDate = date;
             setMonthView();
+            Intent intent = new Intent(CalendarActivity.this, MainScreen.class);
+            startActivity(intent);
         }
     }
 
