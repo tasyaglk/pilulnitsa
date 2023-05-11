@@ -32,15 +32,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
         String amount = null;
 
-//        SharedPreferences sharedPreferences = getSharedPreferences("Course", MODE_PRIVATE);
-//        int size = sharedPreferences.getInt("Size", 0);
-//        List<CourseItem> itemList = new ArrayList<>();
-//        for (int i = 0; i < size; i++) {
-//            String name = sharedPreferences.getString("Name_" + i, "");
-//            int amount = sharedPreferences.getInt("CntToTake_" + i, 0);
-//            CourseItem item = new CourseItem(name, amount);
-//            itemList.add(item);
-//        }
+
 
         for (Pill pill : Pill.pillBox) {
             if (Objects.equals(pill.getName(), event.getName())) {

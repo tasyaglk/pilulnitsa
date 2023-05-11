@@ -4,18 +4,19 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 public class Event {
 
     private String name, time_to_take, how_to_take, taking_days, beginning, ending, choose_end_date;
     private int amount, end_days_number, end_pill_number;
-    public ArrayList<Integer> choose_days;
+    public List<Integer> choose_days;
     private LocalDate date;
     LocalTime time;
     public static ArrayList<Event> eventsList = new ArrayList<>();
 
     public Event(String name, String time_to_take, String how_to_take, String taking_days, String beginning, String ending,
-                 String choose_end_date, int amount, int end_days_number, int end_pill_number, LocalDate date, ArrayList<Integer> choose_days) {
+                 String choose_end_date, int amount, int end_days_number, int end_pill_number, LocalDate date, List<Integer> choose_days) {
         this.name = name;
         this.time_to_take = time_to_take;
         this.how_to_take = how_to_take;
@@ -46,6 +47,7 @@ public class Event {
         return name;
     }
 
+
     public void setName(String name)
     {
         this.name = name;
@@ -66,8 +68,41 @@ public class Event {
         return amount;
     }
 
+    public int getEnd_days_number()
+    {
+        return end_days_number;
+    }
+    public int getEnd_pill_number()
+    {
+        return end_pill_number;
+    }
+
     public String getTime()
     {
         return time_to_take;
+    }
+    public String getHow_to_take()
+    {
+        return how_to_take;
+    }
+    public String getTaking_days()
+    {
+        return taking_days;
+    }
+    public String getBeginning()
+    {
+        return beginning;
+    }
+    public String getEnding()
+    {
+        return ending;
+    }
+    public String getChoose_end_date()
+    {
+        return choose_end_date;
+    }
+
+    public List<Integer> getChoose_days() {
+        return  choose_days;
     }
 }

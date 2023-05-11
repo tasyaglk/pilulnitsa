@@ -61,13 +61,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".EnterCode"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".EnterData"
             android:exported="false">
             <meta-data

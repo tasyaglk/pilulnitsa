@@ -18,7 +18,8 @@ public class AccountActivity extends AppCompatActivity {
     private TextView nameTextView;
     private TextView birthDateTextView;
     private TextView phoneNumberTextView;
-    private Button button_course;
+    private Button buttonСourse;
+    private Button buttonStatistic;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +49,17 @@ public class AccountActivity extends AppCompatActivity {
         birthDateTextView.setText(birthDate);
         phoneNumberTextView.setText(phoneNumber);
 
-        button_course = findViewById(R.id.course);
+        buttonСourse = findViewById(R.id.course);
 
-        button_course.setOnClickListener(view -> {
+        buttonСourse.setOnClickListener(view -> {
             Intent intent = new Intent(AccountActivity.this, CourseActivity.class);
+            startActivity(intent);
+        });
+
+        buttonStatistic = findViewById(R.id.statistics);
+
+        buttonStatistic.setOnClickListener(view -> {
+            Intent intent = new Intent(AccountActivity.this, StatisticsActivity.class);
             startActivity(intent);
         });
         Fragment bottom_fragment = getSupportFragmentManager().findFragmentById(R.id.bottom_navigation_id);

@@ -123,7 +123,7 @@ public class AddToCourseActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
-
+//
         taking_days.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -433,19 +433,13 @@ public class AddToCourseActivity extends AppCompatActivity {
 
                     CourseItem item = new CourseItem(name, finalAmount);
                     CourseItem.course.add(item);
-                    SharedPreferences sharedPreferences = getSharedPreferences("Course", MODE_PRIVATE);
-                    int size = sharedPreferences.getInt("Size", 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("Name_" + size, name);
-                    editor.putString("Dosage_" + size, dosage);
-                    editor.putString("CntToTake" + size, Integer.toString(finalAmount));
-                    editor.putInt("Size", size + 1);
-                    editor.apply();
+
                     CourseItem.course.sort(Comparator.comparing(CourseItem::getName));
 
                     Intent intent;
                     if (add_to_course) {
                         intent = new Intent(context, MainScreen.class);
+
                     } else {
                         intent = new Intent(context, CourseActivity.class);
                     }
@@ -458,7 +452,6 @@ public class AddToCourseActivity extends AppCompatActivity {
                     Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
                             finalAmount, number_d, number_p, begin_local, mSelectedItems);
                     Event.eventsList.add(newEvent);
-
                     begin_calendar.add(Calendar.DATE, amount);
 
                     Pill.changeAmount(name, finalAmount);
@@ -473,6 +466,7 @@ public class AddToCourseActivity extends AppCompatActivity {
                 Intent intent;
                 if (add_to_course) {
                     intent = new Intent(context, MainScreen.class);
+
                 } else {
                     intent = new Intent(context, CourseActivity.class);
                 }
