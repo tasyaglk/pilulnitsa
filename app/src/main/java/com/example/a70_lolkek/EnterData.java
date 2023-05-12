@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -71,7 +70,7 @@ public class EnterData extends AppCompatActivity {
                 }
 
                 // Сохраняем данные в SharedPreferences
-                SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
+                SharedPreferences prefs = getApplicationContext().getSharedPreferences("UserData", MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("surname", surname);
                 editor.putString("name", name);

@@ -89,6 +89,7 @@ public class BottomNavigationFragment extends Fragment implements View.OnClickLi
             case R.id.floating_btn:
                 Intent pills_intent = new Intent(getActivity(), PillsActivity.class);
                 getActivity().startActivity(pills_intent);
-                break;        }
+                break;
+        }
     }
 }

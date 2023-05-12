@@ -19,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class AddToPillboxActivity extends AppCompatActivity {
@@ -218,7 +217,7 @@ public class AddToPillboxActivity extends AppCompatActivity {
                 Pill newPill = new Pill(name, dosage, best, finalAmount);
                 Pill.pillBox.add(newPill);
 
-                SharedPreferences sharedPreferences = getSharedPreferences("Pills", MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Pills", MODE_PRIVATE);
                 int size = sharedPreferences.getInt("Size", 0);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("Name_" + size, name);

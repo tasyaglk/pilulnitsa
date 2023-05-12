@@ -1,7 +1,5 @@
 package com.example.a70_lolkek;
 
-import static java.lang.Thread.sleep;
-
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -11,7 +9,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,7 +22,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.time.Duration;
+import com.example.a70_lolkek.serializers.LocalDateTypeAdapter;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AddToCourseActivity extends AppCompatActivity {
 
@@ -48,28 +49,29 @@ public class AddToCourseActivity extends AppCompatActivity {
     String[] days = {"Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"};
     String[] endPill = {"Дата", "Кол-во дней", "Кол-во таблеток"};
     String name;
-    Calendar begin_calendar = Calendar.getInstance(), end_calendar = Calendar.getInstance();;
+    Calendar begin_calendar = Calendar.getInstance(), end_calendar = Calendar.getInstance();
+    ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_to_course);
-
         initWidgets();
+        amount = findViewById(R.id.amount);
         context = this;
 
-        SharedPreferences sharedPreferences = getSharedPreferences("Pills", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Pills", MODE_PRIVATE);
         int size = sharedPreferences.getInt("Size", 0);
         List<Pill> pillList = new ArrayList<Pill>();
 
         // Создаем список таблеток и добавляем в него все сохраненные таблетки
         for (int i = 0; i < size; i++) {
             String name = sharedPreferences.getString("Name_" + i, "");
-            String dosage = sharedPreferences.getString("Dosage_" + i, "");
+            String dosage1 = sharedPreferences.getString("Dosage_" + i, "");
             String best = sharedPreferences.getString("Best_" + i, "");
             int finalAmount = sharedPreferences.getInt("FinalAmount_" + i, 0);
             if (!name.equals("-1")) {
-                Pill pill = new Pill(name, dosage, best, finalAmount);
+                Pill pill = new Pill(name, dosage1, best, finalAmount);
                 pillList.add(pill);
                 Pill.pillBox.add(pill);
             }
@@ -82,9 +84,11 @@ public class AddToCourseActivity extends AppCompatActivity {
         choose_pill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ((TextView) parent.getChildAt(0)).setTextColor(Color.GRAY);
-                ((TextView) parent.getChildAt(0)).setTextSize(20);
-                ((TextView) parent.getChildAt(0)).setTypeface(Typeface.DEFAULT_BOLD);
+                TextView child = ((TextView) parent.getChildAt(0));
+                if (child == null) return;
+                child.setTextColor(Color.GRAY);
+                child.setTextSize(20);
+                child.setTypeface(Typeface.DEFAULT_BOLD);
                 Pill pill = (Pill) parent.getSelectedItem();
                 name = pill.toString();
             }
@@ -176,7 +180,7 @@ public class AddToCourseActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 StringBuilder selectedDays = new StringBuilder();
-                                for(int i = 0; i < mSelectedItems.size(); ++i){
+                                for (int i = 0; i < mSelectedItems.size(); ++i) {
                                     Integer number = mSelectedItems.get(i);
                                     if (i == mSelectedItems.size() - 1) {
                                         selectedDays.append(days[number]);
@@ -461,12 +465,25 @@ public class AddToCourseActivity extends AppCompatActivity {
 
                 CourseItem item = new CourseItem(name, finalAmount);
                 CourseItem.course.add(item);
+                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Course", MODE_PRIVATE);
+                int size = sharedPreferences.getInt("Size", 0);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("Name_" + size, CourseItem.course.get(CourseItem.course.size() - 1).getName());
+                editor.putInt("FinalAmount_" + size, CourseItem.course.get(CourseItem.course.size() - 1).getAmount());
+                editor.putInt("Size", size + 1);
+                editor.apply();
                 CourseItem.course.sort(Comparator.comparing(CourseItem::getName));
+
+                SharedPreferences sharedPreferencesEventList = getApplicationContext().getSharedPreferences("pillulnitsa", MODE_PRIVATE);
+                String updatedEventsJson = convertEventsToJson(Event.eventsList);
+
+                SharedPreferences.Editor editorEventList = sharedPreferencesEventList.edit();
+                editorEventList.putString("events", updatedEventsJson);
+                editorEventList.apply();
 
                 Intent intent;
                 if (add_to_course) {
                     intent = new Intent(context, MainScreen.class);
-
                 } else {
                     intent = new Intent(context, CourseActivity.class);
                 }
@@ -499,5 +516,12 @@ public class AddToCourseActivity extends AppCompatActivity {
         choose_end_date = findViewById(R.id.choose_end_date);
         save_button = findViewById(R.id.save_button);
         go_back = findViewById(R.id.go_back);
+    }
+
+    private String convertEventsToJson(ArrayList<Event> events) {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter());
+        Gson gson = gsonBuilder.create();
+        return gson.toJson(events);
     }
 }

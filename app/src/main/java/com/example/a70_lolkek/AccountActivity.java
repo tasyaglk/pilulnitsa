@@ -20,6 +20,7 @@ public class AccountActivity extends AppCompatActivity {
     private TextView phoneNumberTextView;
     private Button buttonСourse;
     private Button buttonStatistic;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,7 @@ public class AccountActivity extends AppCompatActivity {
         birthDateTextView.setPaintFlags(birthDateTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         phoneNumberTextView.setPaintFlags(phoneNumberTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
-        SharedPreferences prefs = getSharedPreferences("UserData", MODE_PRIVATE);
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("UserData", MODE_PRIVATE);
 
         String surname = prefs.getString("surname", "");
         String name = prefs.getString("name", "");
@@ -64,7 +65,7 @@ public class AccountActivity extends AppCompatActivity {
         });
         Fragment bottom_fragment = getSupportFragmentManager().findFragmentById(R.id.bottom_navigation_id);
         if (bottom_fragment instanceof Fragment) {
-            bottomNavigationFragment = (BottomNavigationFragment)bottom_fragment;
+            bottomNavigationFragment = (BottomNavigationFragment) bottom_fragment;
             bottomNavigationFragment.initializeComponents();
         }
     }

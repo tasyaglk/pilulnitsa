@@ -17,15 +17,19 @@ public class EventDay {
         //don't forget this line
         calendar.setTime(date);
     }
+
     public int getDay() {
         return calendar.get(Calendar.DAY_OF_MONTH);
     }
+
     public int getMonth() {
         return calendar.get(Calendar.MONTH) + 1;
     }
+
     public int getYear() {
         return calendar.get(Calendar.YEAR);
     }
+
     public Long getCalendarTimeStamp() {
         return calendar.getTime().getTime();
     }

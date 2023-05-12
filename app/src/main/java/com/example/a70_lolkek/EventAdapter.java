@@ -1,7 +1,6 @@
 package com.example.a70_lolkek;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,7 +29,6 @@ public class EventAdapter extends ArrayAdapter<Event> {
         TextView eventCellTV = convertView.findViewById(R.id.eventCellTV);
 
         String amount = null;
-
 
 
         for (Pill pill : Pill.pillBox) {

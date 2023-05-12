@@ -73,7 +73,7 @@ public class PillsActivity extends AppCompatActivity {
                                         if (isIn) {
                                             CourseItem.deleteFromCourse(name);
                                         }
-                                        SharedPreferences sharedPreferences = getSharedPreferences("Pills", MODE_PRIVATE);
+                                        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Pills", MODE_PRIVATE);
                                         int size = sharedPreferences.getInt("Size", 0);
                                         for (int i = 0; i < size; i++) {
                                             String name_sh = sharedPreferences.getString("Name_" + i, "");
@@ -106,7 +106,7 @@ public class PillsActivity extends AppCompatActivity {
 
         // Читаем сохраненные таблетки из SharedPreferences
         List<Pill> pillList = new ArrayList<Pill>();
-        SharedPreferences sharedPreferences = getSharedPreferences("Pills", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Pills", MODE_PRIVATE);
         int size = sharedPreferences.getInt("Size", 0);
         // Создаем список таблеток и добавляем в него все сохраненные таблетки
         for (int i = 0; i < size; i++) {

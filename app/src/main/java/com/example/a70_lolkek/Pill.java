@@ -9,8 +9,7 @@ public class Pill {
     private String name, dosage_type, best_before;
     private int tablets_amount;
 
-    public Pill(String name, String dosage_type, String best_before, int tablets_amount)
-    {
+    public Pill(String name, String dosage_type, String best_before, int tablets_amount) {
         this.name = name;
         this.dosage_type = dosage_type;
         this.best_before = best_before;

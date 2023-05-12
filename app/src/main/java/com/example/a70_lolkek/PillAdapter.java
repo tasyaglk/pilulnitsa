@@ -12,17 +12,14 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class PillAdapter extends ArrayAdapter<Pill>
-{
-    public PillAdapter(@NonNull Context context, List<Pill> events)
-    {
+public class PillAdapter extends ArrayAdapter<Pill> {
+    public PillAdapter(@NonNull Context context, List<Pill> events) {
         super(context, 0, events);
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
-    {
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Pill pill = getItem(position);
 
         if (convertView == null)

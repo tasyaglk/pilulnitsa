@@ -7,30 +7,25 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class CalendarUtils
-{
+public class CalendarUtils {
     public static LocalDate selectedDate;
 
-    public static String formattedDate(LocalDate date)
-    {
+    public static String formattedDate(LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
         return date.format(formatter);
     }
 
-    public static String formattedTime(LocalTime time)
-    {
+    public static String formattedTime(LocalTime time) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
         return time.format(formatter);
     }
 
-    public static String monthYearFromDate(LocalDate date)
-    {
+    public static String monthYearFromDate(LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
         return date.format(formatter);
     }
 
-    public static ArrayList<LocalDate> daysInMonthArray(LocalDate date)
-    {
+    public static ArrayList<LocalDate> daysInMonthArray(LocalDate date) {
         ArrayList<LocalDate> daysInMonthArray = new ArrayList<>();
         YearMonth yearMonth = YearMonth.from(date);
 
@@ -39,12 +34,11 @@ public class CalendarUtils
         LocalDate firstOfMonth = CalendarUtils.selectedDate.withDayOfMonth(1);
         int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
 
-        for(int i = 1; i <= 42; i++)
-        {
+        for (int i = 1; i <= 42; i++) {
             if (i <= dayOfWeek || i > daysInMonth + dayOfWeek)
                 daysInMonthArray.add(null);
             else
-                daysInMonthArray.add(LocalDate.of(selectedDate.getYear(),selectedDate.getMonth(),i - dayOfWeek));
+                daysInMonthArray.add(LocalDate.of(selectedDate.getYear(), selectedDate.getMonth(), i - dayOfWeek));
         }
         return daysInMonthArray;
     }
@@ -54,8 +48,7 @@ public class CalendarUtils
         LocalDate current = mondayForDate(selectedDate);
         LocalDate endDate = current.plusWeeks(1);
 
-        while (current.isBefore(endDate))
-        {
+        while (current.isBefore(endDate)) {
             days.add(current);
             current = current.plusDays(1);
         }

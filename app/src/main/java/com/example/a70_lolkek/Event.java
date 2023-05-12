@@ -12,7 +12,6 @@ public class Event {
     private int amount, end_days_number, end_pill_number;
     public List<Integer> choose_days;
     private LocalDate date;
-    LocalTime time;
     public static ArrayList<Event> eventsList = new ArrayList<>();
 
     public Event(String name, String time_to_take, String how_to_take, String taking_days, String beginning, String ending,

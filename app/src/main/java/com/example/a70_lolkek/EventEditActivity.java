@@ -1,8 +1,8 @@
 package com.example.a70_lolkek;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class EventEditActivity extends AppCompatActivity {
 
