@@ -24,18 +24,12 @@
             android:name=".CalendarActivity"
             android:exported="false" />
         <activity
-            android:name=".MedicationPreferences"
-            android:exported="false">
-        </activity>
-        <activity
             android:name=".AddToPillboxActivity"
             android:exported="false" />
         <activity
             android:name=".AddToCourseActivity"
             android:exported="false" />
-        <activity
-            android:name=".Medication"
-            android:exported="false" />
+
         <activity
             android:name=".SettingsActivity"
             android:exported="false" />

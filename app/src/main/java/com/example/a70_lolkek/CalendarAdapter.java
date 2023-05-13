@@ -39,7 +39,6 @@ class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         final LocalDate date = days.get(position);
         if (date == null) {
             holder.dayOfMonth.setText("");
-            holder.progressView.setVisibility(View.GONE);
         } else {
             holder.dayOfMonth.setText(String.valueOf(date.getDayOfMonth()));
             if (date.equals(CalendarUtils.selectedDate)) holder.parentView.setBackgroundColor(Color.LTGRAY);
