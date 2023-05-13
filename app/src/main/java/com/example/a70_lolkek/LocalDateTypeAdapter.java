@@ -22,6 +22,7 @@ public class LocalDateTypeAdapter implements JsonSerializer<LocalDate>, JsonDese
         return new JsonPrimitive(date.format(formatter));
     }
 
+
     @Override
     public LocalDate deserialize(final JsonElement json, final Type typeOfT,
                                  final JsonDeserializationContext context) throws JsonParseException {
