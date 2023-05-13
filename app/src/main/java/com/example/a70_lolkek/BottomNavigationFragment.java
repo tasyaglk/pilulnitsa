@@ -1,5 +1,6 @@
 package com.example.a70_lolkek;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -62,7 +63,7 @@ public class BottomNavigationFragment extends Fragment implements View.OnClickLi
         int blue_color = getActivity().getResources().getColor(R.color.home_button_main);
         if (getActivity() != null && getActivity() instanceof MainScreen) {
             iv_1.setColorFilter(blue_color);
-        } else if (getActivity() != null && getActivity() instanceof AccountActivity) {
+        } else if (getActivity() != null && (getActivity() instanceof AccountActivity || getActivity() instanceof CourseActivity)) {
             iv_3.setColorFilter(blue_color);
         } else if (getActivity() != null && getActivity() instanceof PillsActivity) {
             floating_btn.setColorFilter(blue_color);
@@ -75,16 +76,17 @@ public class BottomNavigationFragment extends Fragment implements View.OnClickLi
     }
 
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.home_rl:
                 Intent intent = new Intent(getActivity(), MainScreen.class);
-                getActivity().startActivity(intent);
+                requireActivity().startActivity(intent);
                 break;
             case R.id.account_rl:
                 Intent account_intent = new Intent(getActivity(), AccountActivity.class);
-                getActivity().startActivity(account_intent);
+                requireActivity().startActivity(account_intent);
                 break;
             case R.id.floating_btn:
                 Intent pills_intent = new Intent(getActivity(), PillsActivity.class);

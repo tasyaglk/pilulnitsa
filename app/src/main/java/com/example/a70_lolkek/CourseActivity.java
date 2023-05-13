@@ -1,12 +1,9 @@
 package com.example.a70_lolkek;
 
-import static com.example.a70_lolkek.CourseItem.course;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -38,19 +35,16 @@ public class CourseActivity extends AppCompatActivity {
             bottomNavigationFragment.initializeComponents();
         }
 
-        pill_plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Pills", MODE_PRIVATE);
-                int size = sharedPreferences.getInt("Size", 0);
-                if (size == 0) {
-                    Toast.makeText(view.getContext(), "У вас нет лекарств в Пилюльнице", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                AddToCourseActivity.add_to_course = false;
-                Intent intent = new Intent(context, AddToCourseActivity.class);
-                startActivity(intent);
+        pill_plus.setOnClickListener(view -> {
+            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Pills", MODE_PRIVATE);
+            int size = sharedPreferences.getInt("Size", 0);
+            if (size == 0) {
+                Toast.makeText(view.getContext(), "У вас нет лекарств в Пилюльнице", Toast.LENGTH_SHORT).show();
+                return;
             }
+            AddToCourseActivity.add_to_course = false;
+            Intent intent = new Intent(context, AddToCourseActivity.class);
+            startActivity(intent);
         });
     }
 

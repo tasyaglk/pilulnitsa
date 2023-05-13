@@ -39,7 +39,7 @@ public class Pill {
 
     public String getAmount(int tablets_amount_pill) {
         if (tablets_amount_pill % 10 == 1 && tablets_amount_pill != 11) {
-            return dosage_type;
+            return " " + dosage_type;
         } else if ((tablets_amount_pill % 10 == 2 || tablets_amount_pill % 10 == 3 || tablets_amount_pill % 10 == 4) && tablets_amount_pill != 12 && tablets_amount_pill != 13 && tablets_amount_pill != 14) {
             if (Objects.equals(dosage_type, "таблетка")) {
                 return " таблетки";
@@ -50,7 +50,7 @@ public class Pill {
             } else if (Objects.equals(dosage_type, "шприц")) {
                 return " шприца";
             } else {
-                return dosage_type;
+                return " " + dosage_type;
             }
         } else {
             if (Objects.equals(dosage_type, "таблетка")) {
@@ -62,7 +62,7 @@ public class Pill {
             } else if (Objects.equals(dosage_type, "шприц")) {
                 return " шприцов";
             } else {
-                return dosage_type;
+                return " " + dosage_type;
             }
         }
     }

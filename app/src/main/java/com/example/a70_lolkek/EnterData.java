@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -33,41 +31,33 @@ public class EnterData extends AppCompatActivity {
         phoneNumberEditText = findViewById(R.id.phone_number);
         continueButton = findViewById(R.id.continue_begin);
 
-        birthDateEditText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(EnterData.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                // Обновить текст поля ввода даты рождения
-                                String birthDate = dayOfMonth + "/" + (month + 1) + "/" + year;
-                                birthDateEditText.setText(birthDate);
-                            }
-                        }, year, month, dayOfMonth);
-                // Отображаем DatePickerDialog
-                datePickerDialog.show();
-            }
+        birthDateEditText.setOnClickListener(v -> {
+            Calendar calendar = Calendar.getInstance();
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+            DatePickerDialog datePickerDialog = new DatePickerDialog(EnterData.this,
+                    (view, year1, month1, dayOfMonth1) -> {
+                        // Обновить текст поля ввода даты рождения
+                        String birthDate = dayOfMonth1 + "/" + (month1 + 1) + "/" + year1;
+                        birthDateEditText.setText(birthDate);
+                    }, year, month, dayOfMonth);
+            // Отображаем DatePickerDialog
+            datePickerDialog.show();
         });
 
         // При нажатии на кнопку сохраняем данные
-        continueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String surname = surnameEditText.getText().toString();
-                String name = nameEditText.getText().toString();
-                String birthDate = birthDateEditText.getText().toString();
-                String phoneNumber = phoneNumberEditText.getText().toString();
+        continueButton.setOnClickListener(v -> {
+            String surname = surnameEditText.getText().toString();
+            String name = nameEditText.getText().toString();
+            String birthDate = birthDateEditText.getText().toString();
+            String phoneNumber = phoneNumberEditText.getText().toString();
 
-                // Проверяем, заполнены ли все поля
-                if (TextUtils.isEmpty(surname) || TextUtils.isEmpty(name) || TextUtils.isEmpty(birthDate) || TextUtils.isEmpty(phoneNumber)) {
-                    Toast.makeText(EnterData.this, "Пожалуйста, заполните все поля", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+            // Проверяем, заполнены ли все поля
+            if (TextUtils.isEmpty(surname) || TextUtils.isEmpty(name) || TextUtils.isEmpty(birthDate) || TextUtils.isEmpty(phoneNumber)) {
+                Toast.makeText(EnterData.this, "Пожалуйста, заполните все поля", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
                 // Сохраняем данные в SharedPreferences
                 SharedPreferences prefs = getApplicationContext().getSharedPreferences("UserData", MODE_PRIVATE);
@@ -78,10 +68,9 @@ public class EnterData extends AppCompatActivity {
                 editor.putString("phoneNumber", phoneNumber);
                 editor.apply();
 
-                //Переходим на главный экран
-                Intent intent = new Intent(EnterData.this, MainScreen.class);
-                startActivity(intent);
-            }
+            //Переходим на главный экран
+            Intent intent = new Intent(EnterData.this, MainScreen.class);
+            startActivity(intent);
         });
     }
 }

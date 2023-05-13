@@ -18,7 +18,7 @@ public class AccountActivity extends AppCompatActivity {
     private TextView nameTextView;
     private TextView birthDateTextView;
     private TextView phoneNumberTextView;
-    private Button buttonСourse;
+    private Button buttonCourse;
     private Button buttonStatistic;
 
     @SuppressLint("SetTextI18n")
@@ -50,9 +50,9 @@ public class AccountActivity extends AppCompatActivity {
         birthDateTextView.setText(birthDate);
         phoneNumberTextView.setText(phoneNumber);
 
-        buttonСourse = findViewById(R.id.course);
+        buttonCourse = findViewById(R.id.course);
 
-        buttonСourse.setOnClickListener(view -> {
+        buttonCourse.setOnClickListener(view -> {
             Intent intent = new Intent(AccountActivity.this, CourseActivity.class);
             startActivity(intent);
         });

@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a70_lolkek.serializers.LocalDateTypeAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -46,7 +45,7 @@ public class MainScreen extends AppCompatActivity implements CalendarAdapter.OnI
 
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Pills", MODE_PRIVATE);
         int size = sharedPreferences.getInt("Size", 0);
-        List<Pill> pillList = new ArrayList<Pill>();
+        List<Pill> pillList = new ArrayList<>();
 
         // Создаем список таблеток и добавляем в него все сохраненные таблетки
         for (int i = 0; i < size; i++) {
@@ -60,22 +59,16 @@ public class MainScreen extends AppCompatActivity implements CalendarAdapter.OnI
             Pill.pillBox.add(newPill);
         }
 
-        settings_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Здесь будет переход в настройки
-                Intent intent = new Intent(MainScreen.this, SettingsActivity.class);
-                startActivity(intent);
-            }
+        settings_button.setOnClickListener(view -> {
+            // Здесь будет переход в настройки
+            Intent intent = new Intent(MainScreen.this, SettingsActivity.class);
+            startActivity(intent);
         });
 
-        calendar_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Здесь будет переход в календарь
-                Intent intent = new Intent(MainScreen.this, CalendarActivity.class);
-                startActivity(intent);
-            }
+        calendar_button.setOnClickListener(view -> {
+            // Здесь будет переход в календарь
+            Intent intent = new Intent(MainScreen.this, CalendarActivity.class);
+            startActivity(intent);
         });
 
         pill_plus.setOnClickListener(new View.OnClickListener() {
@@ -120,7 +113,7 @@ public class MainScreen extends AppCompatActivity implements CalendarAdapter.OnI
         String eventsJson = sharedPreferences.getString("events", null);
         ArrayList<Event> allEvents;
         if (eventsJson == null) {
-            allEvents = new ArrayList<Event>();
+            allEvents = new ArrayList<>();
         } else {
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter());
@@ -180,7 +173,7 @@ public class MainScreen extends AppCompatActivity implements CalendarAdapter.OnI
         String eventsJson = sharedPreferences.getString("events", null);
         ArrayList<Event> allEvents;
         if (eventsJson == null) {
-            allEvents = new ArrayList<Event>();
+            allEvents = new ArrayList<>();
         } else {
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter());
