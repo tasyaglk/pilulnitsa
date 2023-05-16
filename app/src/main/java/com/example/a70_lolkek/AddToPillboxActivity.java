@@ -16,6 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Comparator;
 
@@ -139,9 +142,27 @@ public class AddToPillboxActivity extends AppCompatActivity {
             int mYear = c.get(Calendar.YEAR); // current year
             int mMonth = c.get(Calendar.MONTH); // current month
             int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
-            // date picker dialog
+
+            /// вот тут чекнуть проверку на дату
+
             @SuppressLint("SetTextI18n") DatePickerDialog datePickerDialog = new DatePickerDialog(AddToPillboxActivity.this,
-                    (view, year, monthOfYear, dayOfMonth) -> best_before.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year), mYear, mMonth, mDay);
+                    (view, year1, month1, dayOfMonth1) -> {
+                        // Обновить текст поля ввода даты срока годности
+                        Calendar end_calendar = Calendar.getInstance();
+                        Calendar begin_calendar = Calendar.getInstance();
+                        begin_calendar.set(mYear, mMonth, mDay);
+                        end_calendar.set(year1, month1, dayOfMonth1);
+                        LocalDate begin_local = LocalDateTime.ofInstant(begin_calendar.toInstant(), begin_calendar.getTimeZone().toZoneId()).toLocalDate();
+                        LocalDate end_local = LocalDateTime.ofInstant(end_calendar.toInstant(), end_calendar.getTimeZone().toZoneId()).toLocalDate();
+                        long days_number = ChronoUnit.DAYS.between(begin_local, end_local);
+                        if (days_number > 0) {
+                            String last_day = "" + dayOfMonth1 / 10 + dayOfMonth1 % 10 + "." + (month1 + 1) / 10 + (month1 + 1) % 10 + "." + year1 / 10 + year1 % 10;
+                            best_before.setText(last_day);
+                        } else {
+                            Toast.makeText(AddToPillboxActivity.this, "Пожалуйста, введите корректную дату срока годности", Toast.LENGTH_SHORT).show();
+                        }
+                    }, mYear, mMonth, mDay);
+            // Отображаем DatePickerDialog
             datePickerDialog.show();
         });
 
@@ -171,15 +192,15 @@ public class AddToPillboxActivity extends AppCompatActivity {
             Pill newPill = new Pill(name, dosage, best, finalAmount);
             Pill.pillBox.add(newPill);
 
-                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Pills", MODE_PRIVATE);
-                int size = sharedPreferences.getInt("Size", 0);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("Name_" + size, name);
-                editor.putString("Dosage_" + size, dosage);
-                editor.putString("Best_" + size, best);
-                editor.putInt("FinalAmount_" + size, finalAmount);
-                editor.putInt("Size", size + 1);
-                editor.apply();
+            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Pills", MODE_PRIVATE);
+            int size = sharedPreferences.getInt("Size", 0);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("Name_" + size, name);
+            editor.putString("Dosage_" + size, dosage);
+            editor.putString("Best_" + size, best);
+            editor.putInt("FinalAmount_" + size, finalAmount);
+            editor.putInt("Size", size + 1);
+            editor.apply();
 
             Pill.pillBox.sort(Comparator.comparing(Pill::getName));
 

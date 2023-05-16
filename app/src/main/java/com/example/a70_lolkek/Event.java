@@ -1,6 +1,7 @@
 package com.example.a70_lolkek;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -12,6 +13,7 @@ public class Event {
     public List<Integer> choose_days;
     private LocalDate date;
     public static ArrayList<Event> eventsList = new ArrayList<>();
+    public static ArrayList<Event> eventLast = new ArrayList<>();
 
     public Event(String name, String time_to_take, String how_to_take, String taking_days, String beginning, String ending,
                  String choose_end_date, int amount, int end_days_number, int end_pill_number, LocalDate date, List<Integer> choose_days) {

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ECF0FF"
     android:orientation="vertical"
+    android:translationX="0dp"
     android:foregroundTint="#CC99CACE"
     tools:context=".EnterData">
 

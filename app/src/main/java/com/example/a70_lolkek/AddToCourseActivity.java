@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class AddToCourseActivity extends AppCompatActivity {
 
@@ -94,6 +95,8 @@ public class AddToCourseActivity extends AppCompatActivity {
 
             }
         });
+
+
 
         how_to_take.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -174,6 +177,7 @@ public class AddToCourseActivity extends AppCompatActivity {
                     .show();
         });
 
+        // beging course year
         beginning.setOnClickListener(v -> {
             // calender class's instance and get current date , month and year from calender
             Calendar c = Calendar.getInstance();
@@ -182,11 +186,12 @@ public class AddToCourseActivity extends AppCompatActivity {
             int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
             // date picker dialog
             @SuppressLint("SetTextI18n") DatePickerDialog datePickerDialog = new DatePickerDialog(context,
-                    (view, year, monthOfYear, dayOfMonth) -> {
-                        beginning.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                        begin_calendar.set(year, monthOfYear, dayOfMonth);
-
+                    (view, year1, month1, dayOfMonth1) -> {
+                        String last_day =  "" + dayOfMonth1 / 10 + dayOfMonth1 % 10 + "." + (month1 + 1) / 10 + (month1 + 1)  % 10 + "." + year1 / 10 + year1 % 10;
+                        beginning.setText(last_day);
+                        begin_calendar.set(year1, month1, dayOfMonth1);
                     }, mYear, mMonth, mDay);
+            // Отображаем DatePickerDialog
             datePickerDialog.show();
         });
 
@@ -254,11 +259,42 @@ public class AddToCourseActivity extends AppCompatActivity {
             int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
             // date picker dialog
             @SuppressLint("SetTextI18n") DatePickerDialog datePickerDialog = new DatePickerDialog(context,
-                    (view, year, monthOfYear, dayOfMonth) -> {
-                        choose_end_date.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                        end_calendar.set(year, monthOfYear, dayOfMonth);
+                    (view, year1, month1, dayOfMonth1) -> {
+                        String data_beg = String.valueOf(beginning.getText());
+                        String[] dateParts = data_beg.split("\\.");
+                        int day_beg = Integer.parseInt(dateParts[0]);
+                        int month_beg = Integer.parseInt(dateParts[1]);
+                        int year_beg = Integer.parseInt(dateParts[2]);
+                        month_beg -= 1;
+                        Calendar end_calendar1 = Calendar.getInstance();
+                        Calendar begin_calendar1 = Calendar.getInstance();
+                        begin_calendar1.set(year_beg, month_beg, day_beg);
+                        end_calendar1.set(year1, month1, dayOfMonth1);
+                        Calendar now_calendar1 = Calendar.getInstance();
+                        now_calendar1.set(mYear, mMonth, mDay);
+                        LocalDate now_local = LocalDateTime.ofInstant(now_calendar1.toInstant(), now_calendar1.getTimeZone().toZoneId()).toLocalDate();
+
+                        LocalDate begin_local = LocalDateTime.ofInstant(begin_calendar1.toInstant(), begin_calendar1.getTimeZone().toZoneId()).toLocalDate();
+                        LocalDate end_local = LocalDateTime.ofInstant(end_calendar1.toInstant(), end_calendar1.getTimeZone().toZoneId()).toLocalDate();
+                        long days_number = ChronoUnit.DAYS.between(begin_local, end_local);
+                        long days_number_before_now = ChronoUnit.DAYS.between(now_local, end_local);
+
+                        // Обновить текст поля ввода даты рождения
+                        //ssssss
+                        if(days_number > 0) {
+                            if(days_number_before_now < 0) {
+                                Toast.makeText(context, "Данный курс уже должен быть закончен", Toast.LENGTH_SHORT).show();
+                            } else {
+                                String last_day = "" + dayOfMonth1 / 10 + dayOfMonth1 % 10 + "." + (month1 + 1) / 10 + (month1 + 1) % 10 + "." + year1 / 10 + year1 % 10;
+                                choose_end_date.setText(last_day);
+                                end_calendar.set(year1, month1, dayOfMonth1);
+                            }
+                        } else {
+                            Toast.makeText(context, "Пожалуйста, введите корректную дату конца курса", Toast.LENGTH_SHORT).show();
+                        }
 
                     }, mYear, mMonth, mDay);
+            // Отображаем DatePickerDialog
             datePickerDialog.show();
         });
 
@@ -276,11 +312,12 @@ public class AddToCourseActivity extends AppCompatActivity {
             String end_date = choose_end_date.getText().toString();
             String number_days = end_days_number.getText().toString();
             String number_pills = end_pill_number.getText().toString();
-
+            int doza = Integer.parseInt(dosage);
             if (name.matches("")) {
                 Toast.makeText(view.getContext(), "Вы не выбрали лекарство", Toast.LENGTH_SHORT).show();
                 return;
-            } else if (dosage.matches("")) {
+            } else if (dosage.matches("") || doza == 0) {
+                // z
                 Toast.makeText(view.getContext(), "Вы не ввели дозировку", Toast.LENGTH_SHORT).show();
                 return;
             } else if (taking_time.matches("")) {
@@ -415,7 +452,6 @@ public class AddToCourseActivity extends AppCompatActivity {
 
                 counter -= substact;
             }
-
                 CourseItem item = new CourseItem(name, finalAmount);
                 CourseItem.course.add(item);
                 SharedPreferences shared = getApplicationContext().getSharedPreferences("Course", MODE_PRIVATE);
@@ -433,7 +469,14 @@ public class AddToCourseActivity extends AppCompatActivity {
                 SharedPreferences.Editor editorEventList = sharedPreferencesEventList.edit();
                 editorEventList.putString("events", updatedEventsJson);
                 editorEventList.apply();
+            Event.eventLast.add(Event.eventsList.get(Event.eventsList.size() - 1));
 
+            SharedPreferences sharedPreferencesEventLast = getApplicationContext().getSharedPreferences("pillulnitsa2", MODE_PRIVATE);
+            String updatedEventsJsonLast = convertEventsToJson(Event.eventLast);
+
+            SharedPreferences.Editor editorEventLast = sharedPreferencesEventLast.edit();
+            editorEventLast.putString("events", updatedEventsJsonLast);
+            editorEventLast.apply();
                 Intent intent;
                 if (add_to_course) {
                     intent = new Intent(context, MainScreen.class);

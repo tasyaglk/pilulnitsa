@@ -11,7 +11,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class EnterData extends AppCompatActivity {
 
@@ -30,7 +34,6 @@ public class EnterData extends AppCompatActivity {
         birthDateEditText = findViewById(R.id.birth_date);
         phoneNumberEditText = findViewById(R.id.phone_number);
         continueButton = findViewById(R.id.continue_begin);
-
         birthDateEditText.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
             int year = calendar.get(Calendar.YEAR);
@@ -39,8 +42,19 @@ public class EnterData extends AppCompatActivity {
             DatePickerDialog datePickerDialog = new DatePickerDialog(EnterData.this,
                     (view, year1, month1, dayOfMonth1) -> {
                         // Обновить текст поля ввода даты рождения
-                        String birthDate = dayOfMonth1 + "/" + (month1 + 1) + "/" + year1;
-                        birthDateEditText.setText(birthDate);
+                        Calendar end_calendar = Calendar.getInstance();
+                        Calendar begin_calendar = Calendar.getInstance();
+                        begin_calendar.set(year, month, dayOfMonth);
+                        end_calendar.set(year1, month1, dayOfMonth1);
+                        LocalDate begin_local = LocalDateTime.ofInstant(begin_calendar.toInstant(), begin_calendar.getTimeZone().toZoneId()).toLocalDate();
+                        LocalDate end_local = LocalDateTime.ofInstant(end_calendar.toInstant(), end_calendar.getTimeZone().toZoneId()).toLocalDate();
+                        long days_number = ChronoUnit.DAYS.between(begin_local, end_local);
+                        if (days_number < 0) {
+                            String birthDate = "" + dayOfMonth1 / 10 + dayOfMonth1 % 10 + "." + (month1 + 1) / 10 + (month1 + 1) % 10 + "." + year1 / 10 + year1 % 10;
+                            birthDateEditText.setText(birthDate);
+                        } else {
+                            Toast.makeText(EnterData.this, "Пожалуйста, введите корректную дату рождения", Toast.LENGTH_SHORT).show();
+                        }
                     }, year, month, dayOfMonth);
             // Отображаем DatePickerDialog
             datePickerDialog.show();
@@ -54,19 +68,32 @@ public class EnterData extends AppCompatActivity {
             String phoneNumber = phoneNumberEditText.getText().toString();
 
             // Проверяем, заполнены ли все поля
-            if (TextUtils.isEmpty(surname) || TextUtils.isEmpty(name) || TextUtils.isEmpty(birthDate) || TextUtils.isEmpty(phoneNumber)) {
-                Toast.makeText(EnterData.this, "Пожалуйста, заполните все поля", Toast.LENGTH_SHORT).show();
+            if (TextUtils.isEmpty(surname)) {
+                Toast.makeText(EnterData.this, "Пожалуйста, введите свою фамилию", Toast.LENGTH_SHORT).show();
                 return;
             }
+            if (TextUtils.isEmpty(name)) {
+                Toast.makeText(EnterData.this, "Пожалуйста, введите свое имя", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (TextUtils.isEmpty(birthDate)) {
+                Toast.makeText(EnterData.this, "Пожалуйста, введите свою дату рождения", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (TextUtils.isEmpty(phoneNumber)) {
+                Toast.makeText(EnterData.this, "Пожалуйста, введите свой номер телефона", Toast.LENGTH_SHORT).show();
+                return;
+            }
+//
 
-                // Сохраняем данные в SharedPreferences
-                SharedPreferences prefs = getApplicationContext().getSharedPreferences("UserData", MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("surname", surname);
-                editor.putString("name", name);
-                editor.putString("birthDate", birthDate);
-                editor.putString("phoneNumber", phoneNumber);
-                editor.apply();
+            // Сохраняем данные в SharedPreferences
+            SharedPreferences prefs = getApplicationContext().getSharedPreferences("UserData", MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("surname", surname);
+            editor.putString("name", name);
+            editor.putString("birthDate", birthDate);
+            editor.putString("phoneNumber", phoneNumber);
+            editor.apply();
 
             //Переходим на главный экран
             Intent intent = new Intent(EnterData.this, MainScreen.class);

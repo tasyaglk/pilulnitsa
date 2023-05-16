@@ -38,7 +38,6 @@ public class AccountActivity extends AppCompatActivity {
         phoneNumberTextView.setPaintFlags(phoneNumberTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("UserData", MODE_PRIVATE);
-
         String surname = prefs.getString("surname", "");
         String name = prefs.getString("name", "");
         String birthDate = prefs.getString("birthDate", "");

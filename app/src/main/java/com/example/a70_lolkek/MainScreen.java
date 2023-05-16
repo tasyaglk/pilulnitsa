@@ -59,6 +59,21 @@ public class MainScreen extends AppCompatActivity implements CalendarAdapter.OnI
             Pill.pillBox.add(newPill);
         }
 
+        SharedPreferences sharedPreferences1 = getApplicationContext().getSharedPreferences("pillulnitsa", MODE_PRIVATE);
+        String eventsJson = sharedPreferences1.getString("events", null);
+        ArrayList<Event> allEvents;
+        if (eventsJson == null) {
+            allEvents = new ArrayList<>();
+        } else {
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter());
+            Gson gson = gsonBuilder.create();
+            Type type = new TypeToken<ArrayList<Event>>() {
+            }.getType();
+            allEvents = gson.fromJson(eventsJson, type);
+        }
+        Event.eventsList = new ArrayList<>(allEvents);
+
         settings_button.setOnClickListener(view -> {
             // Здесь будет переход в настройки
             Intent intent = new Intent(MainScreen.this, SettingsActivity.class);
