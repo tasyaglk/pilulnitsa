@@ -7,46 +7,61 @@
     android:background="@color/background"
     tools:context=".PillsActivity">
 
+    <SearchView
+        android:id="@+id/search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Поиск">
+
+        <requestFocus />
+    </SearchView>
+
     <TextView
         android:id="@+id/pills_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pillsList"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:textColor="@color/button_grey_color"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:text="@string/pillsList"
+        android:textColor="@color/button_grey_color"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/pill_plus"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginTop="34dp"
         android:layout_marginStart="357dp"
+        android:layout_marginTop="34dp"
         app:srcCompat="@drawable/plus_pill" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <ListView
             android:id="@+id/pillListView"
-            android:dividerHeight="10dp"
-            android:layout_marginTop="100dp"
-            android:layout_gravity="center"
             android:layout_width="390dp"
-            android:layout_height="0dp"
-            android:layout_weight="5" />
-    </LinearLayout>
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/search"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="130dp"
+            android:layout_marginBottom="60dp"
+            android:dividerHeight="10dp"
+            tools:ignore="NotSibling" />
+    </RelativeLayout>
 
     <include
         android:id="@+id/bottom_navi"
+        layout="@layout/fragment_bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
 
-        layout="@layout/fragment_bottom_navigation"/>
+        android:layout_alignParentBottom="true"
+        android:windowSoftInputMode="adjustNothing" />
 
 </RelativeLayout>
