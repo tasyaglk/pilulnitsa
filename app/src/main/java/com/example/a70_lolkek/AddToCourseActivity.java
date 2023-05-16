@@ -529,6 +529,14 @@ public class AddToCourseActivity extends AppCompatActivity {
             SharedPreferences.Editor editorEventList = sharedPreferencesEventList.edit();
             editorEventList.putString("events", updatedEventsJson);
             editorEventList.apply();
+            Event.eventLast.add(Event.eventsList.get(Event.eventsList.size() - 1));
+
+            SharedPreferences sharedPreferencesEventLast = getApplicationContext().getSharedPreferences("pillulnitsa2", MODE_PRIVATE);
+            String updatedEventsJsonLast = convertEventsToJson(Event.eventLast);
+
+            SharedPreferences.Editor editorEventLast = sharedPreferencesEventLast.edit();
+            editorEventLast.putString("events", updatedEventsJsonLast);
+            editorEventLast.apply();
 
             Intent intent;
             if (add_to_course) {
