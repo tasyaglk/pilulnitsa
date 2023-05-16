@@ -413,7 +413,6 @@ public class AddToCourseActivity extends AppCompatActivity {
             if (days.matches(takingDays[1])) {
                 amount = 2;
             } else if (days.matches(takingDays[2])) {
-
                 while (counter > 0) {
                     begin_local = LocalDateTime.ofInstant(begin_calendar.toInstant(), begin_calendar.getTimeZone().toZoneId()).toLocalDate();
                     if (mSelectedItems.contains(0) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) {
@@ -431,6 +430,18 @@ public class AddToCourseActivity extends AppCompatActivity {
                                 finalAmount, number_d, number_p, begin_local, mSelectedItems);
                         Event.eventsList.add(newEvent);
                         counter -= substact;
+                    } else if (mSelectedItems.contains(6) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+                        Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
+                                finalAmount, number_d, number_p, begin_local, mSelectedItems);
+                        Event.eventsList.add(newEvent);
+                        counter -= substact;
+                    }
+                    Pill.changeAmount(name, finalAmount);
+                    begin_calendar.add(Calendar.DATE, 1);
+                }  Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
+                                finalAmount, number_d, number_p, begin_local, mSelectedItems);
+                        Event.eventsList.add(newEvent);
+                        counter -= substact;
                     } else if (mSelectedItems.contains(3) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY) {
                         Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
                                 finalAmount, number_d, number_p, begin_local, mSelectedItems);
@@ -442,19 +453,7 @@ public class AddToCourseActivity extends AppCompatActivity {
                         Event.eventsList.add(newEvent);
                         counter -= substact;
                     } else if (mSelectedItems.contains(5) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
-                        Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
-                                finalAmount, number_d, number_p, begin_local, mSelectedItems);
-                        Event.eventsList.add(newEvent);
-                        counter -= substact;
-                    } else if (mSelectedItems.contains(6) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-                        Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
-                                finalAmount, number_d, number_p, begin_local, mSelectedItems);
-                        Event.eventsList.add(newEvent);
-                        counter -= substact;
-                    }
-                    Pill.changeAmount(name, finalAmount);
-                    begin_calendar.add(Calendar.DATE, 1);
-                }
+
 
                 for (int i = 0; i < size; i++) {
                     String name_sh = sharedPills.getString("Name_" + i, "");
@@ -471,7 +470,20 @@ public class AddToCourseActivity extends AppCompatActivity {
 
                 CourseItem item = new CourseItem(name, finalAmount);
                 CourseItem.course.add(item);
+                SharedPreferences sharedPreferencesEventList = getApplicationContext().getSharedPreferences("pillulnitsa", MODE_PRIVATE);
+                String updatedEventsJson = convertEventsToJson(Event.eventsList);
 
+                SharedPreferences.Editor editorEventList = sharedPreferencesEventList.edit();
+                editorEventList.putString("events", updatedEventsJson);
+                editorEventList.apply();
+                Event.eventLast.add(Event.eventsList.get(Event.eventsList.size() - 1));
+
+                SharedPreferences sharedPreferencesEventLast = getApplicationContext().getSharedPreferences("pillulnitsa2", MODE_PRIVATE);
+                String updatedEventsJsonLast = convertEventsToJson(Event.eventLast);
+
+                SharedPreferences.Editor editorEventLast = sharedPreferencesEventLast.edit();
+                editorEventLast.putString("events", updatedEventsJsonLast);
+                editorEventLast.apply();
                 CourseItem.course.sort(Comparator.comparing(CourseItem::getName));
 
                 Intent intent;
@@ -513,13 +525,6 @@ public class AddToCourseActivity extends AppCompatActivity {
 
             CourseItem item = new CourseItem(name, finalAmount);
             CourseItem.course.add(item);
-            SharedPreferences shared = getApplicationContext().getSharedPreferences("Course", MODE_PRIVATE);
-            int size1 = shared.getInt("Size", 0);
-            SharedPreferences.Editor editor = shared.edit();
-            editor.putString("Name_" + size1, CourseItem.course.get(CourseItem.course.size() - 1).getName());
-            editor.putInt("FinalAmount_" + size1, CourseItem.course.get(CourseItem.course.size() - 1).getAmount());
-            editor.putInt("Size", size1 + 1);
-            editor.apply();
 
             CourseItem.course.sort(Comparator.comparing(CourseItem::getName));
 

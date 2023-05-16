@@ -59,25 +59,6 @@ public class CourseActivity extends AppCompatActivity {
         eventListView = findViewById(R.id.pillListView);
         pill_plus = findViewById(R.id.pill_plus);
         context = this;
-//        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Course", MODE_PRIVATE);
-//        int size = sharedPreferences.getInt("Size", 0);
-//        List<CourseItem> itemList = new ArrayList<>();
-//        for (int i = 0; i < size; i++) {
-//            String name = sharedPreferences.getString("Name_" + i, "");
-//            int amount = sharedPreferences.getInt("FinalAmount_" + i, 0);
-////            int amount1 = Integer.parseInt(amount);
-//            CourseItem item = new CourseItem(name, amount);
-//            itemList.add(item);
-//        }
-//        itemList.sort(Comparator.comparing(CourseItem::getName));
-//
-//
-//// Создаем адаптер и устанавливаем его в ListView
-//        CourseAdapter eventAdapter = new CourseAdapter(getApplicationContext(), itemList);
-//        //CourseAdapter eventAdapter = new CourseAdapter(getApplicationContext(), CourseItem.course);
-//
-//        eventListView.setAdapter(eventAdapter);
-
 
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("pillulnitsa2", MODE_PRIVATE);
         String eventsJson = sharedPreferences.getString("events", null);
@@ -100,6 +81,8 @@ public class CourseActivity extends AppCompatActivity {
 // pltcm e,hfnm xnj,s yt rf;lsq ltym rehcf ,sk ssss
         CourseAdapter eventAdapter = new CourseAdapter(getApplicationContext(), Event.eventLast);
         eventListView.setAdapter(eventAdapter);
+
+
     }
 
 

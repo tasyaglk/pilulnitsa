@@ -54,10 +54,37 @@ public class CourseAdapter extends ArrayAdapter<Event> {
         int year = Integer.parseInt(dateParts[0]);
         int month = Integer.parseInt(dateParts[1]);
         int day = Integer.parseInt(dateParts[2]);
-
-
+        StringBuilder whichDays = new StringBuilder();
+        if(Objects.equals(item.getTaking_days(), "Выбрать дни")) {
+            List<Integer> days =  item.getChoose_days();
+            for(Integer i : days) {
+                if(i == 0) {
+                    whichDays.append("Пн ");
+                }
+                if(i == 1) {
+                    whichDays.append("Вт ");
+                }
+                if(i == 2) {
+                    whichDays.append("Ср ");
+                }
+                if(i == 3) {
+                    whichDays.append("Чт ");
+                }
+                if(i == 4) {
+                    whichDays.append("Пт ");
+                }
+                if(i == 5) {
+                    whichDays.append("Сб ");
+                }
+                if(i == 6) {
+                    whichDays.append("Вс ");
+                }
+            }
+        } else {
+            whichDays = new StringBuilder(item.getTaking_days());
+        }
         String pillTitle = item.getName() + " " + item.getTime() + " " + amount + "\nПринимать: " +
-                item.getTaking_days() + "\nC " + item.getBeginning() + " по " + day / 10 + day % 10
+                whichDays + "\nC " + item.getBeginning() + " по " + day / 10 + day % 10
                 + '.' + month / 10 + month % 10 + '.' + year;
 
 
