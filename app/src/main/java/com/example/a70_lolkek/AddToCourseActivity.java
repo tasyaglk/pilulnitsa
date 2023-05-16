@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -351,19 +352,23 @@ public class AddToCourseActivity extends AppCompatActivity {
             // забираем все введенные параметры
             int number_d = 0;
             int number_p = 0;
+            long check_pills = 0;
 
             int finalAmount = Integer.parseInt(dosage);
             if (end.equals(endPill[1])) {
                 number_d = Integer.parseInt(number_days);
+                check_pills = number_d * finalAmount;
             } else if (end.equals(endPill[2])) {
                 number_p = Integer.parseInt(number_pills);
+                check_pills = number_p;
             }
+
             // создаем все события
             int amount = 1;
             LocalDate begin_local = LocalDateTime.ofInstant(begin_calendar.toInstant(), begin_calendar.getTimeZone().toZoneId()).toLocalDate();
             LocalDate end_local;
 
-            long days_number;
+            long days_number = 0;
             long counter = 0;
             int substact = 1;
 
@@ -377,6 +382,32 @@ public class AddToCourseActivity extends AppCompatActivity {
             } else if (!number_pills.matches("")) { // если указано кол-во таблеток
                 counter = number_p;
                 substact = finalAmount;
+            }
+
+            if (end.equals(endPill[0])) { // choose date
+                if (days.matches(takingDays[0])) { // every day
+                    check_pills = days_number * finalAmount;
+                } else if (days.matches(takingDays[1])) {
+                    check_pills = days_number / 2 + days_number % 2;
+                } else {
+                    days_number = countDays(counter);
+                    check_pills = days_number * finalAmount;
+                }
+            }
+
+            // check if enough pills
+
+            SharedPreferences sharedPills = getApplicationContext().getSharedPreferences("Pills", MODE_PRIVATE);
+            for (int i = 0; i < size; i++) {
+                String name_sh = sharedPills.getString("Name_" + i, "");
+                if (name_sh.equals(name)) {
+                    int amount_sh = sharedPills.getInt("FinalAmount_" + i, 0);
+                    if (amount_sh < check_pills) {
+                        Toast.makeText(view.getContext(), "У вас недостаточно таблеток для приема. У вас "
+                                + amount_sh + " лекарства", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
             }
 
             if (days.matches(takingDays[1])) {
@@ -425,6 +456,19 @@ public class AddToCourseActivity extends AppCompatActivity {
                     begin_calendar.add(Calendar.DATE, 1);
                 }
 
+                for (int i = 0; i < size; i++) {
+                    String name_sh = sharedPills.getString("Name_" + i, "");
+                    if (name_sh.equals(name)) {
+                        int amount_sh = sharedPills.getInt("FinalAmount_" + i, 0);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        Log.d("creat", String.valueOf(amount_sh));
+                        Log.d("creat", String.valueOf(check_pills));
+                        editor.putInt("FinalAmount_" + i, (int) (amount_sh - check_pills));
+                        editor.apply();
+                        break;
+                    }
+                }
+
                 CourseItem item = new CourseItem(name, finalAmount);
                 CourseItem.course.add(item);
 
@@ -438,6 +482,7 @@ public class AddToCourseActivity extends AppCompatActivity {
                     intent = new Intent(context, CourseActivity.class);
                 }
                 startActivity(intent);
+                return;
             }
 
             // если каждый день или через день принимаем
@@ -452,39 +497,47 @@ public class AddToCourseActivity extends AppCompatActivity {
 
                 counter -= substact;
             }
-                CourseItem item = new CourseItem(name, finalAmount);
-                CourseItem.course.add(item);
-                SharedPreferences shared = getApplicationContext().getSharedPreferences("Course", MODE_PRIVATE);
-                int size1 = shared.getInt("Size", 0);
-                SharedPreferences.Editor editor = shared.edit();
-                editor.putString("Name_" + size1, CourseItem.course.get(CourseItem.course.size() - 1).getName());
-                editor.putInt("FinalAmount_" + size1, CourseItem.course.get(CourseItem.course.size() - 1).getAmount());
-                editor.putInt("Size", size1 + 1);
-                editor.apply();
-                CourseItem.course.sort(Comparator.comparing(CourseItem::getName));
 
-                SharedPreferences sharedPreferencesEventList = getApplicationContext().getSharedPreferences("pillulnitsa", MODE_PRIVATE);
-                String updatedEventsJson = convertEventsToJson(Event.eventsList);
-
-                SharedPreferences.Editor editorEventList = sharedPreferencesEventList.edit();
-                editorEventList.putString("events", updatedEventsJson);
-                editorEventList.apply();
-            Event.eventLast.add(Event.eventsList.get(Event.eventsList.size() - 1));
-
-            SharedPreferences sharedPreferencesEventLast = getApplicationContext().getSharedPreferences("pillulnitsa2", MODE_PRIVATE);
-            String updatedEventsJsonLast = convertEventsToJson(Event.eventLast);
-
-            SharedPreferences.Editor editorEventLast = sharedPreferencesEventLast.edit();
-            editorEventLast.putString("events", updatedEventsJsonLast);
-            editorEventLast.apply();
-                Intent intent;
-                if (add_to_course) {
-                    intent = new Intent(context, MainScreen.class);
-                } else {
-                    intent = new Intent(context, CourseActivity.class);
+            for (int i = 0; i < size; i++) {
+                String name_sh = sharedPills.getString("Name_" + i, "");
+                if (name_sh.equals(name)) {
+                    int amount_sh = sharedPills.getInt("FinalAmount_" + i, 0);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    Log.d("createver", String.valueOf(amount_sh));
+                    Log.d("createver", String.valueOf(finalAmount));
+                    editor.putInt("FinalAmount_" + i, (int) (amount_sh - check_pills));
+                    editor.apply();
+                    break;
                 }
-                startActivity(intent);
-            });
+            }
+
+            CourseItem item = new CourseItem(name, finalAmount);
+            CourseItem.course.add(item);
+            SharedPreferences shared = getApplicationContext().getSharedPreferences("Course", MODE_PRIVATE);
+            int size1 = shared.getInt("Size", 0);
+            SharedPreferences.Editor editor = shared.edit();
+            editor.putString("Name_" + size1, CourseItem.course.get(CourseItem.course.size() - 1).getName());
+            editor.putInt("FinalAmount_" + size1, CourseItem.course.get(CourseItem.course.size() - 1).getAmount());
+            editor.putInt("Size", size1 + 1);
+            editor.apply();
+
+            CourseItem.course.sort(Comparator.comparing(CourseItem::getName));
+
+            SharedPreferences sharedPreferencesEventList = getApplicationContext().getSharedPreferences("pillulnitsa", MODE_PRIVATE);
+            String updatedEventsJson = convertEventsToJson(Event.eventsList);
+
+            SharedPreferences.Editor editorEventList = sharedPreferencesEventList.edit();
+            editorEventList.putString("events", updatedEventsJson);
+            editorEventList.apply();
+
+            Intent intent;
+            if (add_to_course) {
+                intent = new Intent(context, MainScreen.class);
+            } else {
+                intent = new Intent(context, CourseActivity.class);
+            }
+            startActivity(intent);
+        });
 
         go_back.setOnClickListener(view -> {
             Intent intent;
@@ -520,5 +573,29 @@ public class AddToCourseActivity extends AppCompatActivity {
         gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter());
         Gson gson = gsonBuilder.create();
         return gson.toJson(events);
+    }
+
+    private long countDays(long counter) {
+        long days_number = 0;
+        while (counter > 0) {
+            if (mSelectedItems.contains(0) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) {
+                days_number++;
+            } else if (mSelectedItems.contains(1) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.TUESDAY) {
+                days_number++;
+            } else if (mSelectedItems.contains(2) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY) {
+                days_number++;
+            } else if (mSelectedItems.contains(3) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY) {
+                days_number++;
+            } else if (mSelectedItems.contains(4) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
+                days_number++;
+            } else if (mSelectedItems.contains(5) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+                days_number++;
+            } else if (mSelectedItems.contains(6) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+                days_number++;
+            }
+            begin_calendar.add(Calendar.DATE, 1);
+            counter--;
+        }
+        return days_number;
     }
 }
