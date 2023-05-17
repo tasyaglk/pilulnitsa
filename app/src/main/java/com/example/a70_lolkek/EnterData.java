@@ -66,7 +66,10 @@ public class EnterData extends AppCompatActivity {
             String name = nameEditText.getText().toString();
             String birthDate = birthDateEditText.getText().toString();
             String phoneNumber = phoneNumberEditText.getText().toString();
-
+            if (!(phoneNumber.startsWith("8") && phoneNumber.length() == 11)) {
+                Toast.makeText(EnterData.this, "Пожалуйста, введите свой номер телефона корректно", Toast.LENGTH_SHORT).show();
+                return;
+            }
             // Проверяем, заполнены ли все поля
             if (TextUtils.isEmpty(surname)) {
                 Toast.makeText(EnterData.this, "Пожалуйста, введите свою фамилию", Toast.LENGTH_SHORT).show();

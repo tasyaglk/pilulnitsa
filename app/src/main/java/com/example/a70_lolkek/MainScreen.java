@@ -23,9 +23,13 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class MainScreen extends AppCompatActivity implements CalendarAdapter.OnItemListener {
 
@@ -140,6 +144,21 @@ public class MainScreen extends AppCompatActivity implements CalendarAdapter.OnI
         }
         Event.eventsList = new ArrayList<>(allEvents);
 
+        SharedPreferences sharedPreferences1 = getApplicationContext().getSharedPreferences("pillulnitsa_last", MODE_PRIVATE);
+        String eventsJson1 = sharedPreferences.getString("events", null);
+        ArrayList<Event> allEvents1;
+        if (eventsJson == null) {
+            allEvents1 = new ArrayList<>();
+        } else {
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter());
+            Gson gson = gsonBuilder.create();
+            Type type = new TypeToken<ArrayList<Event>>() {
+            }.getType();
+            allEvents1 = gson.fromJson(eventsJson, type);
+        }
+        Event.eventLast = new ArrayList<>(allEvents1);
+
 // Обновление списка всех событий событием, созданным для выбранной даты
         ArrayList<Event> dailyEvents = Event.eventsForDate(CalendarUtils.selectedDate);
         allEvents.addAll(dailyEvents);
@@ -149,8 +168,14 @@ public class MainScreen extends AppCompatActivity implements CalendarAdapter.OnI
         eventListView.setAdapter(eventAdapter);
     }
 
+    public static String formDate(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", new Locale("ru", "RU"));
+        return date.format(formatter);
+    }
+
     private void setWeekView() {
-        monthYearText.setText(formattedDate(CalendarUtils.selectedDate));
+        monthYearText.setText(formDate(CalendarUtils.selectedDate));
+
         ArrayList<LocalDate> days = daysInWeekArray(CalendarUtils.selectedDate);
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(days, this);

@@ -431,7 +431,10 @@ public class AddToCourseActivity extends AppCompatActivity {
             if (days.matches(takingDays[1])) {
                 amount = 2;
             } else if (days.matches(takingDays[2])) {
+                Log.d("cnt - ", String.valueOf(counter));
+                Log.d("sub - ", String.valueOf(substact));
                 while (counter > 0) {
+                    Log.d("date - ", String.valueOf(begin_local));
                     begin_local = LocalDateTime.ofInstant(begin_calendar.toInstant(), begin_calendar.getTimeZone().toZoneId()).toLocalDate();
                     if (mSelectedItems.contains(0) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) {
                         Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
@@ -496,7 +499,7 @@ public class AddToCourseActivity extends AppCompatActivity {
                 editorEventList.apply();
                 Event.eventLast.add(Event.eventsList.get(Event.eventsList.size() - 1));
 
-                SharedPreferences sharedPreferencesEventLast = getApplicationContext().getSharedPreferences("pillulnitsa2", MODE_PRIVATE);
+                SharedPreferences sharedPreferencesEventLast = getApplicationContext().getSharedPreferences("pillulnitsa_last", MODE_PRIVATE);
                 String updatedEventsJsonLast = convertEventsToJson(Event.eventLast);
 
                 SharedPreferences.Editor editorEventLast = sharedPreferencesEventLast.edit();
@@ -547,17 +550,18 @@ public class AddToCourseActivity extends AppCompatActivity {
 
             CourseItem.course.sort(Comparator.comparing(CourseItem::getName));
 
-            SharedPreferences sharedPreferencesEventList = getApplicationContext().getSharedPreferences("pillulnitsa", MODE_PRIVATE);
+            SharedPreferences sharedPreferencesEventList =
+                    getApplicationContext().getSharedPreferences("pillulnitsa", MODE_PRIVATE);
             String updatedEventsJson = convertEventsToJson(Event.eventsList);
-
             SharedPreferences.Editor editorEventList = sharedPreferencesEventList.edit();
             editorEventList.putString("events", updatedEventsJson);
             editorEventList.apply();
-            Event.eventLast.add(Event.eventsList.get(Event.eventsList.size() - 1));
-            Log.d("event", String.valueOf(Event.eventLast.get(Event.eventLast.size() - 1).getDate()));
-            SharedPreferences sharedPreferencesEventLast = getApplicationContext().getSharedPreferences("pillulnitsa2", MODE_PRIVATE);
-            String updatedEventsJsonLast = convertEventsToJson(Event.eventLast);
 
+            Event.eventLast.add(Event.eventsList.get(Event.eventsList.size() - 1));
+
+            SharedPreferences sharedPreferencesEventLast =
+                    getApplicationContext().getSharedPreferences("pillulnitsa_last", MODE_PRIVATE);
+            String updatedEventsJsonLast = convertEventsToJson(Event.eventLast);
             SharedPreferences.Editor editorEventLast = sharedPreferencesEventLast.edit();
             editorEventLast.putString("events", updatedEventsJsonLast);
             editorEventLast.apply();

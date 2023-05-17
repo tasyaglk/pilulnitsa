@@ -37,7 +37,12 @@ public class EventAdapter extends ArrayAdapter<Event> {
             }
         }
 
-        String eventTitle = event.getName() + ", " + amount + ", " + event.getTime();
+        String time = String.valueOf(event.getTime());
+        String[] timeParts = time.split(":");
+        int hours = Integer.parseInt(timeParts[0]);
+        int min  = Integer.parseInt(timeParts[1]);
+
+        String eventTitle = event.getName() + ", " + amount + ", " + hours / 10 + hours % 10 + ":" + min / 10 + min % 10;
         eventCellTV.setText(eventTitle);
         return convertView;
     }

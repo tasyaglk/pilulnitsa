@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,8 +46,10 @@ public class CourseAdapter extends ArrayAdapter<Event> {
         day = Integer.parseInt(dateParts[2]);
 
         StringBuilder whichDays = new StringBuilder();
+
         if(Objects.equals(item.getTaking_days(), "Выбрать дни")) {
             List<Integer> days =  item.getChoose_days();
+            Collections.sort(days);
             for(Integer i : days) {
                 if(i == 0) {
                     whichDays.append("Пн ");
@@ -72,8 +76,11 @@ public class CourseAdapter extends ArrayAdapter<Event> {
         } else {
             whichDays = new StringBuilder(item.getTaking_days().toLowerCase());
         }
-
-        String pillTitle = item.getName() + " " + item.getTime();
+        String time = String.valueOf(item.getTime());
+        String[] timeParts = time.split(":");
+        int hours = Integer.parseInt(timeParts[0]);
+        int min  = Integer.parseInt(timeParts[1]);
+        String pillTitle = item.getName() + " " + hours / 10 + hours % 10 + ":" + min / 10 + min % 10 ;
         String days_str = "Дни приема: " + whichDays;
         String from = "C " + item.getBeginning();
         String until = "по " + day / 10 + day % 10 + '.' + month / 10 + month % 10 + '.' + year;

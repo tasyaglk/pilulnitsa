@@ -65,7 +65,8 @@ public class CourseActivity extends AppCompatActivity {
         pill_plus = findViewById(R.id.pill_plus);
         context = this;
 
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("pillulnitsa2", MODE_PRIVATE);
+        SharedPreferences sharedPreferences =
+                getApplicationContext().getSharedPreferences("pillulnitsa_last", MODE_PRIVATE);
         String eventsJson = sharedPreferences.getString("events", null);
         ArrayList<Event> allEvents;
         if (eventsJson == null) {
@@ -81,13 +82,6 @@ public class CourseActivity extends AppCompatActivity {
         Event.eventLast = new ArrayList<>(allEvents);
         Event.eventLast.sort(Comparator.comparing(Event::getName)
                 .thenComparing(Event::getTime));
-
-        for (Event ev : allEvents) {
-            Log.d("event", String.valueOf(ev.getDate()));
-        }
-
-        // Обновление списка всех событий событием, созданным для выбранной даты
-        ArrayList<Event> dailyEvents = Event.eventsForDate(CalendarUtils.selectedDate);
 
         CourseAdapter eventAdapter = new CourseAdapter(getApplicationContext(), Event.eventLast);
         eventListView.setAdapter(eventAdapter);
