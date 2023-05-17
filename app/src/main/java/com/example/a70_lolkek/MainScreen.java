@@ -210,7 +210,8 @@ public class MainScreen extends AppCompatActivity implements CalendarAdapter.OnI
 
     private void setEventAdpater() {
 // Получение сохраненных данных и создание списка всех событий
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("pillulnitsa", MODE_PRIVATE);
+        SharedPreferences sharedPreferences =
+                getApplicationContext().getSharedPreferences("pillulnitsa", MODE_PRIVATE);
         String eventsJson = sharedPreferences.getString("events", null);
         ArrayList<Event> allEvents;
         if (eventsJson == null) {
