@@ -42,6 +42,7 @@ public class AddToCourseActivity extends AppCompatActivity {
     private Button save_button, go_back;
     private Context context;
     private ArrayList<Integer> mSelectedItems;
+    String last_day = "";
     public static boolean add_to_course = false;
     String[] takePill = {"До еды", "После еды", "Во время еды", "Неважно"};
     String[] takingDays = {"Каждый день", "Через день", "Выбрать дни"};
@@ -267,8 +268,7 @@ public class AddToCourseActivity extends AppCompatActivity {
             // date picker dialog
             @SuppressLint("SetTextI18n") DatePickerDialog datePickerDialog = new DatePickerDialog(context,
                     (view, year1, month1, dayOfMonth1) -> {
-                        String data_beg = beginningDate;
-                        String[] dateParts = data_beg.split("\\.");
+                        String[] dateParts = beginningDate.split("\\.");
                         int day_beg = Integer.parseInt(dateParts[0]);
                         int month_beg = Integer.parseInt(dateParts[1]);
                         int year_beg = Integer.parseInt(dateParts[2]);
@@ -279,20 +279,18 @@ public class AddToCourseActivity extends AppCompatActivity {
                         end_calendar1.set(year1, month1, dayOfMonth1);
                         Calendar now_calendar1 = Calendar.getInstance();
                         now_calendar1.set(mYear, mMonth, mDay);
-                        LocalDate now_local = LocalDateTime.ofInstant(now_calendar1.toInstant(), now_calendar1.getTimeZone().toZoneId()).toLocalDate();
+                        LocalDate now_local1 = LocalDateTime.ofInstant(now_calendar1.toInstant(), now_calendar1.getTimeZone().toZoneId()).toLocalDate();
 
-                        LocalDate begin_local = LocalDateTime.ofInstant(begin_calendar1.toInstant(), begin_calendar1.getTimeZone().toZoneId()).toLocalDate();
-                        LocalDate end_local = LocalDateTime.ofInstant(end_calendar1.toInstant(), end_calendar1.getTimeZone().toZoneId()).toLocalDate();
-                        long days_number = ChronoUnit.DAYS.between(begin_local, end_local);
-                        long days_number_before_now = ChronoUnit.DAYS.between(now_local, end_local);
+                        LocalDate begin_local1 = LocalDateTime.ofInstant(begin_calendar1.toInstant(), begin_calendar1.getTimeZone().toZoneId()).toLocalDate();
+                        LocalDate end_local1 = LocalDateTime.ofInstant(end_calendar1.toInstant(), end_calendar1.getTimeZone().toZoneId()).toLocalDate();
+                        long days_number = ChronoUnit.DAYS.between(begin_local1, end_local1);
+                        long days_number_before_now = ChronoUnit.DAYS.between(now_local1, end_local1);
 
-                        // Обновить текст поля ввода даты рождения
-                        //ssssss
                         if(days_number > 0) {
                             if(days_number_before_now < 0) {
                                 Toast.makeText(context, "Данный курс уже должен быть закончен", Toast.LENGTH_SHORT).show();
                             } else {
-                                String last_day = "" + dayOfMonth1 / 10 + dayOfMonth1 % 10 + "." + (month1 + 1) / 10 + (month1 + 1) % 10 + "." + year1 / 10 + year1 % 10;
+                                last_day = "" + dayOfMonth1 / 10 + dayOfMonth1 % 10 + "." + (month1 + 1) / 10 + (month1 + 1) % 10 + "." + year1 / 10 + year1 % 10;
                                 choose_end_date.setText(last_day);
                                 end_calendar.set(year1, month1, dayOfMonth1);
                             }
@@ -320,11 +318,11 @@ public class AddToCourseActivity extends AppCompatActivity {
             String end_date = choose_end_date.getText().toString();
             String number_days = end_days_number.getText().toString();
             String number_pills = end_pill_number.getText().toString();
-            int doza = Integer.parseInt(dosage);
+            //int doza = Integer.parseInt(dosage);
             if (name.matches("")) {
                 Toast.makeText(view.getContext(), "Вы не выбрали лекарство", Toast.LENGTH_SHORT).show();
                 return;
-            } else if (dosage.matches("") || doza == 0) {
+            } else if (dosage.matches("") || dosage.matches("0")) {
                 // z
                 Toast.makeText(view.getContext(), "Вы не ввели дозировку", Toast.LENGTH_SHORT).show();
                 return;
@@ -380,12 +378,25 @@ public class AddToCourseActivity extends AppCompatActivity {
             int substact = 1;
 
             if (!end_date.matches("")) { // если указана дата окончания
-                end_local = LocalDateTime.ofInstant(end_calendar.toInstant(), end_calendar.getTimeZone().toZoneId()).toLocalDate();
+                String[] dateParts = last_day.split("\\.");
+                int day_end = Integer.parseInt(dateParts[0]);
+                int month_end = Integer.parseInt(dateParts[1]);
+                int year_end = Integer.parseInt(dateParts[2]);
+                month_end -= 1;
+                Calendar now_calendar1 = Calendar.getInstance();
+                now_calendar1.set(year_end, month_end, day_end);
+                end_local = LocalDateTime.ofInstant(now_calendar1.toInstant(), now_calendar1.getTimeZone().toZoneId()).toLocalDate();
+
+                //end_local = LocalDateTime.ofInstant(end_calendar.toInstant(), end_calendar.getTimeZone().toZoneId()).toLocalDate();
                 days_number = ChronoUnit.DAYS.between(begin_local, end_local);
                 counter = days_number + 1;
+                if (days.matches(takingDays[1])) {
+                    substact = 2;
+                }
+                //substact = 2;
             } else if (!number_days.matches("")) { // если указано кол-во дней
                 days_number = number_d;
-                counter = days_number + 1;
+                counter = days_number;
             } else if (!number_pills.matches("")) { // если указано кол-во таблеток
                 counter = number_p;
                 substact = finalAmount;
@@ -503,9 +514,10 @@ public class AddToCourseActivity extends AppCompatActivity {
                 startActivity(intent);
                 return;
             }
-
+            Log.d("cnt - ", String.valueOf(counter));
             // если каждый день или через день принимаем
             while (counter > 0) {
+                //Log.d("date - ", String.valueOf(begin_local));
                 begin_local = LocalDateTime.ofInstant(begin_calendar.toInstant(), begin_calendar.getTimeZone().toZoneId()).toLocalDate();
                 Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
                         finalAmount, number_d, number_p, begin_local, mSelectedItems);
@@ -542,7 +554,7 @@ public class AddToCourseActivity extends AppCompatActivity {
             editorEventList.putString("events", updatedEventsJson);
             editorEventList.apply();
             Event.eventLast.add(Event.eventsList.get(Event.eventsList.size() - 1));
-
+            Log.d("event", String.valueOf(Event.eventLast.get(Event.eventLast.size() - 1).getDate()));
             SharedPreferences sharedPreferencesEventLast = getApplicationContext().getSharedPreferences("pillulnitsa2", MODE_PRIVATE);
             String updatedEventsJsonLast = convertEventsToJson(Event.eventLast);
 

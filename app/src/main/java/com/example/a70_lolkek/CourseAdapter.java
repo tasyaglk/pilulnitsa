@@ -35,11 +35,14 @@ public class CourseAdapter extends ArrayAdapter<Event> {
             }
         }
 
-        String End = String.valueOf(item.getDate());
+        String End = "";
+        int year, month, day;
+        End = String.valueOf(item.getDate());
         String[] dateParts = End.split("-");
-        int year = Integer.parseInt(dateParts[0]);
-        int month = Integer.parseInt(dateParts[1]);
-        int day = Integer.parseInt(dateParts[2]);
+        year = Integer.parseInt(dateParts[0]);
+        month = Integer.parseInt(dateParts[1]);
+        day = Integer.parseInt(dateParts[2]);
+
         StringBuilder whichDays = new StringBuilder();
         if(Objects.equals(item.getTaking_days(), "Выбрать дни")) {
             List<Integer> days =  item.getChoose_days();

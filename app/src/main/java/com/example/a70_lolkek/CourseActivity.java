@@ -83,7 +83,7 @@ public class CourseActivity extends AppCompatActivity {
                 .thenComparing(Event::getTime));
 
         for (Event ev : allEvents) {
-            Log.d("event", ev.getName());
+            Log.d("event", String.valueOf(ev.getDate()));
         }
 
         // Обновление списка всех событий событием, созданным для выбранной даты
