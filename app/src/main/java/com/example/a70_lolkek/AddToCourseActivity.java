@@ -253,6 +253,12 @@ public class AddToCourseActivity extends AppCompatActivity {
         });
 
         choose_end_date.setOnClickListener(v -> {
+            String beginningDate = String.valueOf(beginning.getText());
+            if (beginningDate.isEmpty()) {
+                Toast.makeText(context, "Пожалуйста, введите дату начала курса", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             // calender class's instance and get current date , month and year from calender
             Calendar c = Calendar.getInstance();
             int mYear = c.get(Calendar.YEAR); // current year
@@ -261,7 +267,7 @@ public class AddToCourseActivity extends AppCompatActivity {
             // date picker dialog
             @SuppressLint("SetTextI18n") DatePickerDialog datePickerDialog = new DatePickerDialog(context,
                     (view, year1, month1, dayOfMonth1) -> {
-                        String data_beg = String.valueOf(beginning.getText());
+                        String data_beg = beginningDate;
                         String[] dateParts = data_beg.split("\\.");
                         int day_beg = Integer.parseInt(dateParts[0]);
                         int month_beg = Integer.parseInt(dateParts[1]);
@@ -298,6 +304,7 @@ public class AddToCourseActivity extends AppCompatActivity {
             // Отображаем DatePickerDialog
             datePickerDialog.show();
         });
+
 
         save_button.setOnClickListener(view -> {
             String dosage = amount.getText().toString();

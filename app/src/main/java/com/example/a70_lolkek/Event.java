@@ -31,6 +31,26 @@ public class Event {
         this.choose_days = choose_days;
     }
 
+    @Override
+    public String toString() {
+        return "Event{" +
+                "name='" + name + '\'' +
+                ", time='" + time_to_take + '\'' +
+                ", how='" + how_to_take + '\'' +
+                ", days='" + taking_days + '\'' +
+                ", beg='" + beginning + '\'' +
+                ", end='" + ending + '\'' +
+                ", end_date='" + choose_end_date + '\'' +
+                ", amount='" + amount + '\'' +
+                ", end_days_number='" + end_days_number + '\'' +
+                ", end_pill_number='" + end_pill_number + '\'' +
+                ", date='" + date + '\'' +
+                ", choose_days='" + choose_days + '\'' +
+                // добавьте остальные поля, которые вам нужны
+                '}';
+    }
+
+
     public static ArrayList<Event> eventsForDate(LocalDate date) {
         ArrayList<Event> events = new ArrayList<>();
 
