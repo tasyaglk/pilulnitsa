@@ -1,16 +1,7 @@
 package com.example.a70_lolkek;
 
-import static android.content.Context.MODE_PRIVATE;
-
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.Typeface;
-import android.text.Layout;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.style.AlignmentSpan;
-import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,20 +25,16 @@ public class CourseAdapter extends ArrayAdapter<Event> {
         Event item = getItem(position);
 
         if (convertView == null)
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.pill_cell, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.course_item, parent, false);
 
-        TextView eventCellTV = convertView.findViewById(R.id.pill_cell);
-
-        String amount = null;
+        String amount_str = null;
 
         for (Pill pill : Pill.pillBox) {
             if (Objects.equals(pill.getName(), item.getName())) {
-                amount = item.getAmount() + " " + pill.getAmount(item.getAmount());
+                amount_str = item.getAmount() + " " + pill.getAmount(item.getAmount());
             }
         }
 
-
-// car
         String End = String.valueOf(item.getDate());
         String[] dateParts = End.split("-");
         int year = Integer.parseInt(dateParts[0]);
@@ -81,14 +67,29 @@ public class CourseAdapter extends ArrayAdapter<Event> {
                 }
             }
         } else {
-            whichDays = new StringBuilder(item.getTaking_days());
+            whichDays = new StringBuilder(item.getTaking_days().toLowerCase());
         }
-        String pillTitle = item.getName() + " " + item.getTime() + " " + amount + "\nПринимать: " +
-                whichDays + "\nC " + item.getBeginning() + " по " + day / 10 + day % 10
-                + '.' + month / 10 + month % 10 + '.' + year;
+
+        String pillTitle = item.getName() + " " + item.getTime();
+        String days_str = "Дни приема: " + whichDays;
+        String from = "C " + item.getBeginning();
+        String until = "по " + day / 10 + day % 10 + '.' + month / 10 + month % 10 + '.' + year;
+
+        TextView name_time = convertView.findViewById(R.id.name_time);
+        TextView amount = convertView.findViewById(R.id.amount);
+        TextView days = convertView.findViewById(R.id.days);
+        TextView food = convertView.findViewById(R.id.food);
+        TextView date_start = convertView.findViewById(R.id.date_start);
+        TextView date_end = convertView.findViewById(R.id.date_end);
 
 
-        eventCellTV.setText(pillTitle);
+        name_time.setText(pillTitle);
+        amount.setText(amount_str);
+        days.setText(days_str);
+        food.setText(item.getHow_to_take());
+        date_start.setText(from);
+        Log.d("end", until);
+        date_end.setText(until);
 
         return convertView;
     }

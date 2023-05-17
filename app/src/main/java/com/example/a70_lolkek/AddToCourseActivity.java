@@ -430,18 +430,6 @@ public class AddToCourseActivity extends AppCompatActivity {
                                 finalAmount, number_d, number_p, begin_local, mSelectedItems);
                         Event.eventsList.add(newEvent);
                         counter -= substact;
-                    } else if (mSelectedItems.contains(6) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-                        Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
-                                finalAmount, number_d, number_p, begin_local, mSelectedItems);
-                        Event.eventsList.add(newEvent);
-                        counter -= substact;
-                    }
-                    Pill.changeAmount(name, finalAmount);
-                    begin_calendar.add(Calendar.DATE, 1);
-                }  Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
-                                finalAmount, number_d, number_p, begin_local, mSelectedItems);
-                        Event.eventsList.add(newEvent);
-                        counter -= substact;
                     } else if (mSelectedItems.contains(3) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY) {
                         Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
                                 finalAmount, number_d, number_p, begin_local, mSelectedItems);
@@ -453,7 +441,19 @@ public class AddToCourseActivity extends AppCompatActivity {
                         Event.eventsList.add(newEvent);
                         counter -= substact;
                     } else if (mSelectedItems.contains(5) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
-
+                        Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
+                                finalAmount, number_d, number_p, begin_local, mSelectedItems);
+                        Event.eventsList.add(newEvent);
+                        counter -= substact;
+                    } else if (mSelectedItems.contains(6) && begin_calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+                        Event newEvent = new Event(name, taking_time, taking_method, days, begin, end, end_date,
+                                finalAmount, number_d, number_p, begin_local, mSelectedItems);
+                        Event.eventsList.add(newEvent);
+                        counter -= substact;
+                    }
+                    Pill.changeAmount(name, finalAmount);
+                    begin_calendar.add(Calendar.DATE, 1);
+                }
 
                 for (int i = 0; i < size; i++) {
                     String name_sh = sharedPills.getString("Name_" + i, "");

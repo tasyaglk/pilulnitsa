@@ -40,9 +40,13 @@ public class Pill {
     }
 
     public LocalDate getBestBeforeDate() {
-        String[] date_str = best_before.split("/");
+        String[] date_str = best_before.split("\\.");
         LocalDate date = LocalDate.of(Integer.parseInt(date_str[2]), Integer.parseInt(date_str[1]), Integer.parseInt(date_str[0]));
         return date;
+    }
+
+    public String getDosageType() {
+        return dosage_type;
     }
 
     public String getAmount(int tablets_amount_pill) {
