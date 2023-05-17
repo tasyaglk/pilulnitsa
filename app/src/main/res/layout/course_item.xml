@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="390dp"
+    android:layout_height="100dp"
+    android:background="@drawable/white_settings_button"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/name_time"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/words_color_dark"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/words_color_dark"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/days"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/words_color_dark"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/food"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+
+        android:layout_marginStart="320dp"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/words_color_dark"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/date_start"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="65dp"
+        android:textColor="@color/button_grey_color"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/date_end"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="65dp"
+        android:textColor="@color/button_grey_color"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

@@ -6,6 +6,7 @@ import static com.example.a70_lolkek.CalendarUtils.formattedDate;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -137,7 +138,7 @@ public class MainScreen extends AppCompatActivity implements CalendarAdapter.OnI
             }.getType();
             allEvents = gson.fromJson(eventsJson, type);
         }
-        Event.eventsList = new ArrayList<>(allEvents);;
+        Event.eventsList = new ArrayList<>(allEvents);
 
 // Обновление списка всех событий событием, созданным для выбранной даты
         ArrayList<Event> dailyEvents = Event.eventsForDate(CalendarUtils.selectedDate);

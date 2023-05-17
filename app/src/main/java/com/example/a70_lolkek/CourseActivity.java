@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -74,17 +75,18 @@ public class CourseActivity extends AppCompatActivity {
             allEvents = gson.fromJson(eventsJson, type);
         }
         Event.eventLast = new ArrayList<>(allEvents);
-        Event.eventLast.sort(Comparator.comparing(Event::getName));
+        Event.eventLast.sort(Comparator.comparing(Event::getName)
+                                       .thenComparing(Event::getTime));
+
+        for (Event ev : allEvents) {
+            Log.d("event", ev.getName());
+        }
 
         // Обновление списка всех событий событием, созданным для выбранной даты
         ArrayList<Event> dailyEvents = Event.eventsForDate(CalendarUtils.selectedDate);
-// pltcm e,hfnm xnj,s yt rf;lsq ltym rehcf ,sk ssss
+
         CourseAdapter eventAdapter = new CourseAdapter(getApplicationContext(), Event.eventLast);
         eventListView.setAdapter(eventAdapter);
 
-
     }
-
-
-
 }

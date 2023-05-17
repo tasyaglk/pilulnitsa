@@ -1,19 +1,11 @@
 package com.example.a70_lolkek;
 
-import static java.lang.Integer.parseInt;
-
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewTreeObserver;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -31,8 +23,8 @@ public class PillsActivity extends AppCompatActivity implements SearchView.OnQue
     BottomNavigationFragment bottomNavigationFragment;
     private ListView eventListView;
     Context context;
-    ListViewAdapter adapter;
     SearchView editsearch;
+    PillAdapter eventAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,29 +103,25 @@ public class PillsActivity extends AppCompatActivity implements SearchView.OnQue
             }
         }
 
-        adapter = new ListViewAdapter(this, pillList);
-        eventListView.setAdapter(adapter);
-
-        editsearch = findViewById(R.id.search);
-        editsearch.setOnQueryTextListener(this);
-
         pillList.sort(Comparator.comparing(Pill::getName)
                                 .thenComparing(Pill::getBestBeforeDate));
 
 
-        PillAdapter eventAdapter = new PillAdapter(getApplicationContext(), pillList);
+        eventAdapter = new PillAdapter(getApplicationContext(), pillList);
         eventListView.setAdapter(eventAdapter);
+
+        editsearch = findViewById(R.id.search);
+        editsearch.setOnQueryTextListener(this);
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-
         return false;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        adapter.filter(newText);
+        eventAdapter.filter(newText);
         return false;
     }
 }
